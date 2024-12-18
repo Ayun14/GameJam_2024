@@ -16,14 +16,14 @@ public class PlayerCatchState : PlayerAirState
         if (_player.catchedBullet != null)
         {
             _player.catchedBullet.Hold();
-            _player.arrowTrm.position = _player.catchedBullet.transform.position;
-            _player.arrowTrm.gameObject.SetActive(true);
+            _player.arrow.transform.position = _player.catchedBullet.transform.position;
+            _player.arrow.ArrowSetActive(true, 0.1f);
         }
     }
 
     public override void Update()
     {
-        _player.catchedBullet.Rotate(_player.GetMouseDirection(_player.arrowTrm));
+        _player.catchedBullet.Rotate(_player.GetMouseDirection(_player.arrow.transform));
     }
 
     public override void Exit()
@@ -44,7 +44,7 @@ public class PlayerCatchState : PlayerAirState
 
     private void HandleEndCatch()
     {
-        _player.arrowTrm.gameObject.SetActive(false);
+        _player.arrow.ArrowSetActive(false, 0.1f);
         Time.timeScale = 1f;
 
         _player.ChangeState("Fall");
