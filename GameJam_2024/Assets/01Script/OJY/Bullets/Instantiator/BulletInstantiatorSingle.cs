@@ -5,10 +5,10 @@ using UnityEngine;
 //[CreateAssetMenu(menuName = "SO/BulletInstantiator_Single")]
 public class BulletInstantiatorSingle : BaseBulletInstantiatorSO
 {
-    public override void InstantiateBullet(Transform instansiateTransform, Vector3 direction, BaseBullet prefab)
+    public override void InstantiateBullet(Transform instansiateTransform, Vector3 direction, BaseBullet prefab, float speed)
     {
         direction.Normalize();
         BaseBullet result = Instantiate(prefab, instansiateTransform.position, Quaternion.identity);
-        result.Init(direction);
+        result.Init(direction, speed);
     }
 }
