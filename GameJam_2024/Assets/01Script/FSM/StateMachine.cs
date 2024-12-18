@@ -42,6 +42,7 @@ public class StateMachine
 
     public void ChangeStateMachine(string newStateName)
     {
+        Debug.Log("Change");
         EntityState newState = GetState(newStateName);
         Debug.Assert(newState != null, $"Start state {newState} not found");
 

@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInputCompo : MonoBehaviour, IEntityComponent
+public class PlayerInputCompo : MonoBehaviour
 {
-    public event Action<Vector2> OnMovementKeyEvent;
     public event Action OnJumpKeyEvent;
 
     public event Action OnMouseDownEvent;
     public event Action<Vector2> OnMouseStayEvent;
     public event Action OnMouseUpEvent;
 
+    public Vector2 InputDirection { get; private set; }
     private bool _isMouseDown = false;
 
     private Player _player;
@@ -61,7 +61,6 @@ public class PlayerInputCompo : MonoBehaviour, IEntityComponent
     {
         float x = Input.GetAxis("Horizontal");
 
-        Vector2 movement = new Vector2(x, 0);
-        OnMovementKeyEvent?.Invoke(movement);
+        InputDirection = new Vector2(x, 0);
     }
 }
