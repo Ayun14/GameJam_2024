@@ -12,7 +12,10 @@ public class ButtonController : MonoBehaviour
     [SerializeField] private Button _settingButton;
     [SerializeField] private Button _exitButton;
 
-    [SerializeField] private CanvasGroup _settingPanel;
+    [SerializeField] private GameObject _settingCanvas;
+    [SerializeField] private CanvasGroup _settingCanvasGroup;
+    [SerializeField] private RectTransform _settingRectTransform;
+
     [SerializeField] private CanvasGroup _fadeCanvas;
 
     [SerializeField] private Slider _musicSlider;
@@ -32,8 +35,9 @@ public class ButtonController : MonoBehaviour
     public void OnSettingButton()
     {
         ButtonClickSound();
-
-        _settingPanel.alpha = 1;
+        _settingCanvas.SetActive(true);
+        _settingCanvasGroup.alpha = 1;
+        StartCoroutine(ShowSetting(true));
     }
 
     public void OnExitButton()
@@ -46,8 +50,7 @@ public class ButtonController : MonoBehaviour
     public void OnXButton()
     {
         ButtonClickSound();
-
-        _settingPanel.alpha = 0;
+        StartCoroutine(ShowSetting(false));
     }
 
     private IEnumerator Fade()
@@ -57,6 +60,18 @@ public class ButtonController : MonoBehaviour
         yield return tween.WaitForCompletion();
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(0);
+    }
+
+    private IEnumerator ShowSetting(bool isOpen)
+    {
+        float endPosX = isOpen ? 380f : 1300f;
+        Tween tween = _settingRectTransform.DOAnchorPosX(endPosX, 0.5f);
+        yield return tween.WaitForCompletion();
+        if(!isOpen)
+        {
+            _settingCanvasGroup.alpha = 0;
+            _settingCanvas.SetActive(false);
+        }
     }
 
     public void BGMVolumeChange()
