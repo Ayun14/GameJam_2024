@@ -97,7 +97,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1.3
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 3
   m_Material: {fileID: 0}
@@ -107,7 +107,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -143,8 +143,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0010252744, y: -0.10560322}
-  m_Size: {x: 0.2846931, y: 0.87901783}
+  m_Offset: {x: 0.030774623, y: -0.19430816}
+  m_Size: {x: 0.5826079, y: 1.7928464}
   m_Direction: 0
 --- !u!114 &801205426167924644
 MonoBehaviour:
@@ -179,7 +179,7 @@ MonoBehaviour:
   _whatIsBullet:
     serializedVersion: 2
     m_Bits: 8
-  arrowTrm: {fileID: 0}
+  arrow: {fileID: 0}
   catchedBullet: {fileID: 0}
 --- !u!114 &3405870623045230360
 MonoBehaviour:
@@ -223,7 +223,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6995753639645681742}
@@ -353,7 +353,7 @@ Transform:
   m_GameObject: {fileID: 5665118206906895244}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.36, z: 0}
+  m_LocalPosition: {x: 0.054, y: -0.932, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _groundCheckerTrm: {fileID: 4997399927054037983}
-  _checkerSize: {x: 0.4, y: 0.25}
+  _checkerSize: {x: 0.65, y: 0.25}
   _checkDistance: 0.25
   _whatIsGround:
     serializedVersion: 2
@@ -405,8 +405,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3422575141687841616}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
