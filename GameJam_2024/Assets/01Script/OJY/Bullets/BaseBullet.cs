@@ -103,9 +103,11 @@ public abstract class BaseBullet : MonoBehaviour
         Debug.DrawRay(transform.position, currentDirection * deadForcePower, Color.red, 5);
         rigid.AddForce(currentDirection * deadForcePower, ForceMode2D.Impulse);
     }
-    public void Init(Vector3 initialDirection = default)
+    public void Init(Vector3 initialDirection = default, float speed = 0)
     {
         currentDirection = initialDirection;
+        if(!Mathf.Approximately(speed, 0))
+            this.speed = speed;
     }
     private void OnTriggerEnter(Collider other)
     {
