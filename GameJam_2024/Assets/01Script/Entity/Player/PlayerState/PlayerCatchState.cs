@@ -1,7 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using DG.Tweening;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerCatchState : PlayerAirState
 {
@@ -18,9 +15,15 @@ public class PlayerCatchState : PlayerAirState
         Time.timeScale = 0f;
         if (_player.catchedBullet != null)
         {
-            _player.arrowTrm.position = _player.catchedBullet.position;
+            _player.catchedBullet.Hold();
+            _player.arrowTrm.position = _player.catchedBullet.transform.position;
             _player.arrowTrm.gameObject.SetActive(true);
         }
+    }
+
+    public override void Update()
+    {
+        _player.catchedBullet.Rotate(_player.GetMouseDirection(_player.arrowTrm));
     }
 
     public override void Exit()
@@ -28,9 +31,12 @@ public class PlayerCatchState : PlayerAirState
         // 대쉬 하기
         if (_player.catchedBullet != null)
         {
-            _player.transform.position = _player.catchedBullet.position;
+            _player.catchedBullet.Release();
+            _player.transform.position = _player.catchedBullet.transform.position;
             _player.Dash();
         }
+
+        _player.ResetJumpCount();
 
         _player.InputCompo.OnMouseUpEvent -= HandleEndCatch;
         base.Exit();
