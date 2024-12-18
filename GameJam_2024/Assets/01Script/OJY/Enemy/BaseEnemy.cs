@@ -15,9 +15,10 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField] private BaseBullet bulletPrefab;
     [SerializeField] private Transform firePos;
     [SerializeField] private SpawnDirection spawnDirection;
+    [SerializeField] private float speed = 5;
 
     [Header("Shoot Settings")]
-    [SerializeField] private float repeatDuration;
+    [SerializeField] private float repeatDuration = 2.5f;
     private float timer = 0;
     //[SerializeField] private bool parabolaPreview;
     private void Update()
@@ -43,7 +44,7 @@ public class BaseEnemy : MonoBehaviour
                 direction = -firePos.right;
                 break;
         }
-        instansiaor.InstantiateBullet(firePos, direction, bulletPrefab);
+        instansiaor.InstantiateBullet(firePos, direction, bulletPrefab, speed);
     }
     private void OnDrawGizmosSelected()
     {
