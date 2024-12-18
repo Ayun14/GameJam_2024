@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5d73b137b54e74ca10a7fcb6c4183d, type: 3}
+  m_Name: PlayerDeadState
+  m_EditorClassIdentifier: 
+  stateName: Dead
+  className: PlayerDeadState
+  stateParam: {fileID: 11400000, guid: ac16ede638fe0a447b08215f8e5b03b4, type: 2}
