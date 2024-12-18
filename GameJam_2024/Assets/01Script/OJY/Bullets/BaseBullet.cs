@@ -119,8 +119,9 @@ public abstract class BaseBullet : MonoBehaviour
         if(!Mathf.Approximately(speed, 0))
             this.speed = speed;
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
+   
 }
