@@ -4,12 +4,21 @@ public class Arrow : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed;
 
+    private Player _player;
+
+    private void Awake()
+    {
+        _player = GetComponentInParent<Player>();
+    }
+
     private void Update()
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0f;
+        Rotate();
+    }
 
-        Vector3 direction = (mousePosition - transform.position).normalized;
+    private void Rotate()
+    {
+        Vector3 direction = _player.GetMouseDirection(transform);
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float angle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle, rotationSpeed * Time.unscaledDeltaTime);
 
