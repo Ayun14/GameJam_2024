@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f3d95c0cf888004eb8323bbca15c012, type: 3}
-  m_Name: BulletPickUpAudio
+  m_Name: BulletHoldAudio
   m_EditorClassIdentifier: 
   audioClips:
-  - {fileID: 8300000, guid: 59e45ed3cf100f541868539d390dc2b3, type: 3}
+  - {fileID: 8300000, guid: 9dded730558c0a646a2d989318d26999, type: 3}
   selector: {fileID: 11400000, guid: 883bbaac4a52ddb419ef4f57eef79a21, type: 2}
