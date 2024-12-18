@@ -6,11 +6,16 @@ using UnityEngine.UI;
 
 public class FadeController : MonoBehaviour
 {
-    public CanvasGroup canvasGroup;
+    private CanvasGroup _canvasGroup;
 
     void Awake()
     {
-        canvasGroup.gameObject.SetActive(false);
+        _canvasGroup = GetComponent<CanvasGroup>();
+    }
+
+    private void Start()
+    {
+        _canvasGroup.alpha = 0;
     }
 
     public void FadeIn()
@@ -27,18 +32,15 @@ public class FadeController : MonoBehaviour
     {
         if (isFadeIn)
         {
-            canvasGroup.alpha = 1;
-            Tween tween = canvasGroup.DOFade(0f, 1f);
+            _canvasGroup.alpha = 1;
+            Tween tween = _canvasGroup.DOFade(0f, 1f);
             yield return tween.WaitForCompletion();
-            canvasGroup.gameObject.SetActive(false);
         }
         else
         {
-            canvasGroup.alpha = 0;
-            canvasGroup.gameObject.SetActive(true);
-            Tween tween = canvasGroup.DOFade(1f, 1f);
+            _canvasGroup.alpha = 0;
+            Tween tween = _canvasGroup.DOFade(1f, 1f);
             yield return tween.WaitForCompletion();
-            StartCoroutine(Fade(true));
         }
     }
 }
