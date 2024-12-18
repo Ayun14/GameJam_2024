@@ -14,6 +14,9 @@ public abstract class BaseBullet : MonoBehaviour
     [SerializeField] protected AudioClipsSO onHoldAudio;
     [SerializeField] protected AudioClipsSO onReleaseAudio;
 
+    [Header("Rotation")]
+    [SerializeField] private float _rotationSpeed;
+
 #if BULLETDEBUG
     [Header("Debug")]
     [SerializeField] protected Vector3 playerArrowDir;
@@ -66,7 +69,7 @@ public abstract class BaseBullet : MonoBehaviour
     /// <param name="dir">dir of player arrow</param>
     public void Rotate(Vector3 dir)
     {
-        Vector3 result = dir;// Vector3.RotateTowards(transform.up, dir, manualTurnSpeed * Time.deltaTime, 10);
+        Vector3 result = dir;
         result *= -1;
         transform.up = result;
         currentDirection = result;
