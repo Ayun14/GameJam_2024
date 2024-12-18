@@ -51,7 +51,9 @@ public abstract class BaseBullet : MonoBehaviour
     protected abstract void Move();
     public void Rotate(Vector3 dir)
     {
-
+        Vector3 result = Vector3.RotateTowards(transform.up, dir, 5 * Time.deltaTime, 10);
+        transform.up = result;
+        currentDirection = result;
         ClampRotation();
     }
     public void Release()
