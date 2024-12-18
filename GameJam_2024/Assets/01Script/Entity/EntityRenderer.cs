@@ -13,7 +13,6 @@ public class EntityRenderer : AnimatorRenderer, IEntityComponent
     }
 
     #region Flip Controller
-
     public void Flip()
     {
         FacingDirection *= -1;
@@ -24,6 +23,15 @@ public class EntityRenderer : AnimatorRenderer, IEntityComponent
     {
         if (Mathf.Abs(FacingDirection + normalizedXMove) < 0.5f)
             Flip();
+    }
+
+    #endregion
+
+    #region Jump Controller
+
+    public void Jump(AnimatorParamSO param, float count)
+    {
+        SetParam(param, count);
     }
 
     #endregion

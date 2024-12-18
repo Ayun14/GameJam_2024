@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db5d73b137b54e74ca10a7fcb6c4183d, type: 3}
-  m_Name: PlayerDeadState
+  m_Script: {fileID: 11500000, guid: 9c68acd5bd8af1648835c3029566b2e6, type: 3}
+  m_Name: JumpCountParam
   m_EditorClassIdentifier: 
-  stateName: Dead
-  className: PlayerDeadState
-  stateParam: {fileID: 11400000, guid: ac16ede638fe0a447b08215f8e5b03b4, type: 2}
+  paramValue: JumpCount
+  hashValue: 712818268
