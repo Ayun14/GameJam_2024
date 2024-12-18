@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public abstract class Entity : MonoBehaviour
 {
     public UnityEvent OnHitEvent;
-    public UnityEvent OnDeathEvent;
     public UnityEvent<Vector2> OnKnockBackEvent;
 
     protected Dictionary<Type, IEntityComponent> _components;

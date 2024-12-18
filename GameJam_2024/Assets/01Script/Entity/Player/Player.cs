@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,48 +5,48 @@ public class Player : Entity
 {
     [Header("Stat")]
     [SerializeField] private float jumpPower;
+    public float JumpPower => jumpPower;
     [SerializeField] private float jumpCount;
+    public float JumpCount => jumpCount;
 
     [Header("FSM")]
     public List<StateSO> stateList;
+    public AnimatorParamSO jumpCountParam;
     private StateMachine _stateMachine;
+
+    [Header("Catch")]
+    [SerializeField] private float _dashPower;
+    [SerializeField] private float _catchRadius;
+    [SerializeField] private LayerMask _whatIsBullet;
+    [HideInInspector] public Transform arrowTrm;
+    [HideInInspector] public BaseBullet catchedBullet;
 
     public float CurrentJumpCount { get; set; }
     public bool CanAirJump => CurrentJumpCount > 0;
 
-    private PlayerInputCompo _inputCompo;
-    //private PlayerAttackCompo _atkCompo;
+    [HideInInspector] public PlayerInputCompo InputCompo { get; private set; }
+    private EntityMover _mover;
 
     protected override void AfterInitialize()
     {
         base.AfterInitialize();
-        _stateMachine = new StateMachine(stateList, this);
-        _stateMachine.InitStateMachine("IDLE");
+        InputCompo = GetComponent<PlayerInputCompo>();
+        _mover = GetCompo<EntityMover>();
 
-        _inputCompo = GetCompo<PlayerInputCompo>();
-        //_atkCompo = GetCompo<PlayerAttackCompo>();
-        //_inputCompo.On += HandleAttackKeyEvent;
+        // Arrow
+        arrowTrm = transform.Find("Arrow").GetComponent<Transform>();
+        arrowTrm.gameObject.SetActive(false);
+
+        // FSM
+        _stateMachine = new StateMachine(stateList, this);
+        _stateMachine.InitStateMachine("Idle");
+
         GetCompo<EntityAnimatorTrigger>().OnAnimationEnd += HandleAnimationEnd;
     }
 
     private void OnDestroy()
     {
-        //_inputCompo.On += HandleAttackKeyEvent;
         GetCompo<EntityAnimatorTrigger>().OnAnimationEnd -= HandleAnimationEnd;
-    }
-
-    private void HandleOnJumpKeyEvent()
-    {
-        throw new NotImplementedException();
-    }
-
-    private void HandleAttackKeyEvent()
-    {
-        //if (_stateMachine.CurrentState == _stateMachine.GetState("ATTACK")) return;
-        //if (_atkCompo.AttemptAttack())
-        //{
-        //    ChangeState("ATTACK");
-        //}
     }
 
     private void HandleAnimationEnd()
@@ -63,8 +62,54 @@ public class Player : Entity
     public void ChangeState(string newState)
         => _stateMachine.ChangeStateMachine(newState);
 
+    public bool IsCanCatch()
+    {
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _catchRadius, Vector3.up, 0f, _whatIsBullet);
+        if (hits.Length > 0)
+        {
+            float minDistance = hits[0].distance;
+            RaycastHit2D firstHit = hits[0];
+            foreach (RaycastHit2D hit in hits)
+            {
+                if (hit.distance < minDistance)
+                {
+                    minDistance = hit.distance;
+                    firstHit = hit;
+                }
+            }
+            catchedBullet = firstHit.transform.GetComponent<BaseBullet>();
+            return true;
+        }
+        catchedBullet = null;
+        return false;
+    }
+
+    public void Dash()
+    {
+        _mover.KnockBack(GetMouseDirection(transform) * _dashPower, 0.7f);
+    }
+
+    public Vector3 GetMouseDirection(Transform trm)
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f;
+
+        return (mousePosition - trm.position).normalized;
+    }
+
     public void ResetJumpCount()
     {
         CurrentJumpCount = jumpCount;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out BaseBullet bullet))
+        {
+            if (catchedBullet != null && catchedBullet.transform == bullet.transform) return;
+
+            OnHitEvent?.Invoke();
+            ChangeState("Hit");
+        }
     }
 }
