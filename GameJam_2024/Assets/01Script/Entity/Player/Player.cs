@@ -1,9 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using Unity.VisualScripting;
 
 public class Player : Entity
 {
@@ -23,7 +19,7 @@ public class Player : Entity
     [SerializeField] private float _catchRadius;
     [SerializeField] private LayerMask _whatIsBullet;
     [HideInInspector] public Transform arrowTrm;
-    [HideInInspector] public Transform catchedBullet;
+    [HideInInspector] public BaseBullet catchedBullet;
 
     public float CurrentJumpCount { get; set; }
     public bool CanAirJump => CurrentJumpCount > 0;
@@ -81,7 +77,7 @@ public class Player : Entity
                     firstHit = hit;
                 }
             }
-            catchedBullet = firstHit.transform;
+            catchedBullet = firstHit.transform.GetComponent<BaseBullet>();
             return true;
         }
         catchedBullet = null;
@@ -90,11 +86,30 @@ public class Player : Entity
 
     public void Dash()
     {
-        _mover.AddForceToEntity(arrowTrm.right.normalized * _dashPower);
+        _mover.KnockBack(GetMouseDirection(transform) * _dashPower, 0.7f);
+    }
+
+    public Vector3 GetMouseDirection(Transform trm)
+    {
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f;
+
+        return (mousePosition - trm.position).normalized;
     }
 
     public void ResetJumpCount()
     {
         CurrentJumpCount = jumpCount;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out BaseBullet bullet))
+        {
+            if (catchedBullet != null && catchedBullet.transform == bullet.transform) return;
+
+            OnHitEvent?.Invoke();
+            ChangeState("Hit");
+        }
     }
 }
