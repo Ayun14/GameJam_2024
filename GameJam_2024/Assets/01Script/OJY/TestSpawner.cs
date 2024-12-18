@@ -15,6 +15,6 @@ public class TestSpawner : MonoBehaviour
     private void SpawnBullet()
     {
         BaseBullet result = Instantiate(bullet, spawnPos.position, Quaternion.identity);
-        result.Init(Vector3.right, target);
+        result.Init(Vector3.right);
     }
 }
