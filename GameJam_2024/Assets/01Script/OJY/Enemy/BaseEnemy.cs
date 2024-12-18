@@ -8,8 +8,13 @@ public class BaseEnemy : MonoBehaviour
     {
         None,
         Right,
-        Left
+        Left,
+        Down,
+        Up
     }
+    [Header("General")]
+    [SerializeField] private Transform visualTransform;
+
     [Header("Bullet Settings")]
     [SerializeField] private BaseBulletInstantiatorSO instansiaor;
     [SerializeField] private BaseBullet bulletPrefab;
@@ -20,14 +25,40 @@ public class BaseEnemy : MonoBehaviour
     [Header("Shoot Settings")]
     [SerializeField] private float repeatDuration = 2.5f;
     private float timer = 0;
+
+    [Header("Animation Settings")]
+    [SerializeField] private AnimatorParamSO idleParam;
+    [SerializeField] private AnimatorParamSO attackParam;
+    [SerializeField] private float animationAttackDuration;
+    private Animator enemyAnimator;
+    private bool isPlayed;
     //[SerializeField] private bool parabolaPreview;
+    private void Awake()
+    {
+        enemyAnimator = GetComponent<Animator>();
+        if(spawnDirection == SpawnDirection.Left)
+        {
+            Vector3 result = visualTransform.eulerAngles;
+            result.y = 180;
+            visualTransform.eulerAngles = result;
+        }
+    }
     private void Update()
     {
         timer += Time.deltaTime;
+        if (timer >= repeatDuration - animationAttackDuration && !isPlayed)
+        {
+            print("playanimation" + timer);
+            enemyAnimator.Play(attackParam.hashValue, -1, 0);
+            isPlayed = true;
+        }
         if (timer >= repeatDuration)
         {
+            print("fire" + timer);
             timer = 0;
             FireBullet();
+            enemyAnimator.Play(idleParam.hashValue, -1, 0);
+            isPlayed = false;
         }
         //if (Input.GetKeyDown(KeyCode.Space))
         //    FireBullet();
@@ -43,7 +74,13 @@ public class BaseEnemy : MonoBehaviour
             case SpawnDirection.Left:
                 direction = -firePos.right;
                 break;
-        }
+            case SpawnDirection.Down:
+                direction = -firePos.up;
+                break;
+            case SpawnDirection.Up:
+                direction = firePos.up;
+                break;
+        };
         instansiaor.InstantiateBullet(firePos, direction, bulletPrefab, speed);
     }
     private void OnDrawGizmosSelected()
@@ -61,8 +98,14 @@ public class BaseEnemy : MonoBehaviour
                 case SpawnDirection.Left:
                     direction = -firePos.right * 2;
                     break;
+                case SpawnDirection.Down:
+                    direction = -firePos.up * 2;
+                    break;
+                case SpawnDirection.Up:
+                    direction = firePos.up * 2;
+                    break;
             };
-            Gizmos.DrawRay(transform.position, direction);
+            Gizmos.DrawRay(firePos.position, direction);
             Gizmos.DrawWireSphere(firePos.position + direction, 0.2f);
         }
         //void DrawParabola(Vector3 start, float speed, Vector3 direction, float gravity)

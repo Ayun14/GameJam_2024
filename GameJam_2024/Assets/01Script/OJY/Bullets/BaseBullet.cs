@@ -1,4 +1,4 @@
-//#define BULLETDEBUG
+// #define BULLETDEBUG
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,14 +8,18 @@ public abstract class BaseBullet : MonoBehaviour
     [Header("General")]
     [SerializeField] protected float speed = 5;
     [SerializeField] protected float deadForcePower = 21;
-    //[SerializeField] protected float manualTurnSpeed = 5;
 
-    [Header("Audio")]
+    //[Header("Rotation")]
+    //[SerializeField] private float _rotationSpeed;
+
+    [Header("OnHold")]
     [SerializeField] protected AudioClipsSO onHoldAudio;
+
+    [Header("OnRelease")]
+    [SerializeField] protected GameObject onReleaseEffect;
+    [SerializeField] protected Transform onReleaseEffectTransform;
     [SerializeField] protected AudioClipsSO onReleaseAudio;
 
-    [Header("Rotation")]
-    [SerializeField] private float _rotationSpeed;
 
 #if BULLETDEBUG
     [Header("Debug")]
@@ -33,6 +37,7 @@ public abstract class BaseBullet : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         rigid = GetComponent<Rigidbody2D>();
+        transform.up = currentDirection;
     }
     private void Update()
     {
@@ -88,12 +93,16 @@ public abstract class BaseBullet : MonoBehaviour
 
         //allowMove = true;
         onReleaseAudio.Play(onReleaseAudio.SelectedAudioClip, audioSource);
+        Instantiate(onReleaseEffect, onReleaseEffectTransform.position, onReleaseEffectTransform.rotation, onReleaseEffectTransform);
         OnDeadForce();
         OnRelease();
     }
     public void Hold()
     {
         isHolded = true;
+        if (TryGetComponent(out Collider2D currentCollider))
+            currentCollider.enabled = false;
+        else Debug.LogWarning("bullet has no collider");
 
         allowRotation = false;
         allowMove = false;

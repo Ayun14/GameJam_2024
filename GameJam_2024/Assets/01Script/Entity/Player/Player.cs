@@ -109,6 +109,7 @@ public class Player : Entity
             if (catchedBullet != null && catchedBullet.transform == bullet.transform) return;
 
             OnHitEvent?.Invoke();
+            SoundController.Instance.PlaySFX(4);
             ChangeState("Hit");
         }
     }

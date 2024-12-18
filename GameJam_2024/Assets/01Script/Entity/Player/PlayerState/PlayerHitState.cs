@@ -21,6 +21,7 @@ public class PlayerHitState : EntityState
         base.Update();
         if (_mover.IsGroundDetected())
         {
+            SoundController.Instance.PlaySFX(3);
             _player.ResetJumpCount();
             _player.ChangeState("Idle");
         }

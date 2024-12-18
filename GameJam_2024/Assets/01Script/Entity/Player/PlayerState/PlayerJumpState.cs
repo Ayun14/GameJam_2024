@@ -15,6 +15,12 @@ public class PlayerJumpState : PlayerAirState
         _mover.StopImmediately(true);
         _mover.AddForceToEntity(jumpPower);
         _mover.OnMovement += HandleVelocityChange;
+
+        // Sound
+        int playIdx = 5;
+        if (_player.CurrentJumpCount == 0)
+            playIdx = 6;
+        SoundController.Instance.PlaySFX(playIdx);
     }
 
     public override void Exit()
