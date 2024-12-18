@@ -50,6 +50,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5045438585443442157, guid: cc1e2539622daa741ba427cc15d1b0f6, type: 3}
   firePos: {fileID: 3713090339483465653}
   spawnDirection: 1
+  repeatDuration: 2.5
 --- !u!1 &5492154577056168864
 GameObject:
   m_ObjectHideFlags: 0
