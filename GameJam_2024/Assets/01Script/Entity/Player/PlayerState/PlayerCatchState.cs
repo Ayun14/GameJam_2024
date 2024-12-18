@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class PlayerCatchState : PlayerAirState
 {
+    private CameraShakeController _shaker;
+
     public PlayerCatchState(Entity entity, AnimatorParamSO stateParam) : base(entity, stateParam)
     {
+        _shaker = entity.GetCompo<CameraShakeController>();
     }
 
     public override void Enter()
@@ -36,6 +39,8 @@ public class PlayerCatchState : PlayerAirState
             _player.Dash();
         }
 
+        _shaker.CameraShake();
+        SoundController.Instance.PlaySFX(2);
         _player.ResetJumpCount();
 
         _player.InputCompo.OnMouseUpEvent -= HandleEndCatch;

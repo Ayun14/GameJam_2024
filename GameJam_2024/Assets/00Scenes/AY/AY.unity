@@ -181,7 +181,7 @@ MonoBehaviour:
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
-    ModeOverride: 0
+    ModeOverride: 1
     LensShift: {x: 0, y: 0}
     GateFit: 2
     FocusDistance: 10
@@ -582,12 +582,12 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 1.6354264
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
   m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
+  m_SensorSize: {x: 1, y: 1}
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -623,7 +623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1999,6 +1999,14 @@ PrefabInstance:
       propertyPath: _dashPower
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1420514884264210242, guid: cc6edd129da6669498e2d89487b14df0, type: 3}
+      propertyPath: _shakeTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1420514884264210242, guid: cc6edd129da6669498e2d89487b14df0, type: 3}
+      propertyPath: _virtualCamera
+      value: 
+      objectReference: {fileID: 20800658}
     - target: {fileID: 2267461057608650818, guid: cc6edd129da6669498e2d89487b14df0, type: 3}
       propertyPath: m_Name
       value: Player
