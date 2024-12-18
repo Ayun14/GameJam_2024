@@ -210,7 +210,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   deadForcePower: 25
-  _rotationSpeed: 0
   onHoldAudio: {fileID: 11400000, guid: 01ada7ac5b7a4c742938da992311096b, type: 2}
   onReleaseEffect: {fileID: 8859666348391566620, guid: 032873863e1c2ef49842bbef1d5d6945, type: 3}
   onReleaseEffectTransform: {fileID: 1239357663957677192}
@@ -341,6 +340,14 @@ PrefabInstance:
     - target: {fileID: 1312375329498510821, guid: 922c31dee7200cc4d956dbe2a50f5b18, type: 3}
       propertyPath: m_Name
       value: Visual_Greenball
+      objectReference: {fileID: 0}
+    - target: {fileID: 3328709416407755309, guid: 922c31dee7200cc4d956dbe2a50f5b18, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3328709416407755309, guid: 922c31dee7200cc4d956dbe2a50f5b18, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 639430641
       objectReference: {fileID: 0}
     - target: {fileID: 5037509696548047151, guid: 922c31dee7200cc4d956dbe2a50f5b18, type: 3}
       propertyPath: m_LocalPosition.x

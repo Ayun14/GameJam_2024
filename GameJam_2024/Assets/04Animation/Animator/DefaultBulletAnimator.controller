@@ -28,7 +28,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Green Effect and Bullet 16x16_218
+  m_Name: DefaultBulletAnimator
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
