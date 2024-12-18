@@ -39,7 +39,6 @@ public class MeterController : MonoBehaviour
         int zoneMeter = _zoneY / _meterY; // 구역이 몇 M인지
         if (_meter % zoneMeter == 0)
         {
-            Debug.Log("Camera +");
             float y = _zoneY * (_meter / zoneMeter);
             _cameraPointTrm.position = new Vector2(_cameraPointTrm.position.x,
                 _cameraPointOrigin.y + y);
