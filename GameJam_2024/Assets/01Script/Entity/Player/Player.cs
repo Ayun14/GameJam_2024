@@ -18,7 +18,7 @@ public class Player : Entity
     [SerializeField] private float _dashPower;
     [SerializeField] private float _catchRadius;
     [SerializeField] private LayerMask _whatIsBullet;
-    [HideInInspector] public Transform arrowTrm;
+    [HideInInspector] public Arrow arrow;
     [HideInInspector] public BaseBullet catchedBullet;
 
     public float CurrentJumpCount { get; set; }
@@ -34,8 +34,8 @@ public class Player : Entity
         _mover = GetCompo<EntityMover>();
 
         // Arrow
-        arrowTrm = transform.Find("Arrow").GetComponent<Transform>();
-        arrowTrm.gameObject.SetActive(false);
+        arrow = transform.Find("Arrow").GetComponent<Arrow>();
+        arrow.transform.gameObject.SetActive(false);
 
         // FSM
         _stateMachine = new StateMachine(stateList, this);
