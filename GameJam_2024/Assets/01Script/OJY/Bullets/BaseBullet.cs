@@ -22,8 +22,6 @@ public abstract class BaseBullet : MonoBehaviour
     protected bool allowMove = true;
     protected bool allowRotation = true;
     protected bool isHolded;
-
-    protected Transform target;
     protected Vector3 currentDirection;
 
     protected AudioSource audioSource;
@@ -32,9 +30,7 @@ public abstract class BaseBullet : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         rigid = GetComponent<Rigidbody2D>();
-        rigid.gravityScale = 0;
     }
-#if BULLETDEBUG
     private void Update()
     {
         if (allowRotation)
@@ -42,6 +38,7 @@ public abstract class BaseBullet : MonoBehaviour
             transform.up = currentDirection;
             ClampRotation();
         }
+#if BULLETDEBUG
 
         if (Input.GetKeyDown(KeyCode.K))
             Hold();
@@ -49,8 +46,8 @@ public abstract class BaseBullet : MonoBehaviour
             Release();
         if (Input.GetKeyDown(KeyCode.N))
             Rotate(playerArrowDir);
-    }
 #endif
+    }
     private void ClampRotation()
     {
         Vector3 eulerAngles = transform.eulerAngles;
@@ -106,13 +103,12 @@ public abstract class BaseBullet : MonoBehaviour
         Debug.DrawRay(transform.position, currentDirection * deadForcePower, Color.red, 5);
         rigid.AddForce(currentDirection * deadForcePower, ForceMode2D.Impulse);
     }
-    public void Init(Vector3 initialDirection = default, Transform target = null)
+    public void Init(Vector3 initialDirection = default)
     {
-        this.target = target;
         currentDirection = initialDirection;
     }
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }
