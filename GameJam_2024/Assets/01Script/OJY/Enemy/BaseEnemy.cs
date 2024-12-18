@@ -42,6 +42,12 @@ public class BaseEnemy : MonoBehaviour
             result.y = 180;
             visualTransform.eulerAngles = result;
         }
+        if(spawnDirection == SpawnDirection.Up)
+        {
+            Vector3 result = visualTransform.eulerAngles;
+            result.z = 180;
+            visualTransform.eulerAngles = result;
+        }
     }
     private void Update()
     {
