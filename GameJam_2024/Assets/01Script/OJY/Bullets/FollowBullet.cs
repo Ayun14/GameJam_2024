@@ -5,9 +5,18 @@ using UnityEngine;
 public class FollowBullet : BaseBullet
 {
     [SerializeField] protected float turnSpeed = 5;
+    [SerializeField] protected Transform target;
+    private void Start()
+    {
+        target = default;
+    }
     protected override void Move()
     {
-        Vector3 targetDir = target.position - transform.position;
+        Vector3 targetPos = Vector3.zero;
+        if (target != null) targetPos = target.position;
+        else Debug.LogError("can't find target");
+
+        Vector3 targetDir = targetPos - transform.position;
         targetDir.Normalize();
         Debug.DrawRay(transform.position, targetDir, Color.blue);
 
