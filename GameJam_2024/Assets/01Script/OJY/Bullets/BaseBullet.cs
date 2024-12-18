@@ -1,25 +1,40 @@
+//#define BULLETDEBUG
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class BaseBullet : MonoBehaviour
 {
+    [Header("General")]
+    [SerializeField] protected float speed = 5;
+    [SerializeField] protected float deadForcePower = 21;
+    //[SerializeField] protected float manualTurnSpeed = 5;
+
+    [Header("Audio")]
+    [SerializeField] protected AudioClipsSO onHoldAudio;
+    [SerializeField] protected AudioClipsSO onReleaseAudio;
+
+#if BULLETDEBUG
+    [Header("Debug")]
+    [SerializeField] protected Vector3 playerArrowDir;
+#endif
+
     protected bool allowMove = true;
     protected bool allowRotation = true;
+    protected bool isHolded;
 
-    [SerializeField] protected float speed = 5;
-    [SerializeField] protected float turnSpeed = 5;
-    [SerializeField] protected float manualTurnSpeed = 30;
     protected Transform target;
     protected Vector3 currentDirection;
 
+    protected AudioSource audioSource;
     protected Rigidbody2D rigid;
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         rigid = GetComponent<Rigidbody2D>();
         rigid.gravityScale = 0;
     }
+#if BULLETDEBUG
     private void Update()
     {
         if (allowRotation)
@@ -32,11 +47,10 @@ public abstract class BaseBullet : MonoBehaviour
             Hold();
         if (Input.GetKeyDown(KeyCode.L))
             Release();
-        if (Input.GetKey(KeyCode.N))
-            Rotate(Vector3.up);
-        if (Input.GetKey(KeyCode.M))
-            Rotate(Vector3.right);
+        if (Input.GetKeyDown(KeyCode.N))
+            Rotate(playerArrowDir);
     }
+#endif
     private void ClampRotation()
     {
         Vector3 eulerAngles = transform.eulerAngles;
@@ -49,31 +63,48 @@ public abstract class BaseBullet : MonoBehaviour
         Move();
     }
     protected abstract void Move();
+    /// <summary>
+    /// call this function when rotating player arrow
+    /// </summary>
+    /// <param name="dir">dir of player arrow</param>
     public void Rotate(Vector3 dir)
     {
-        Vector3 result = Vector3.RotateTowards(transform.up, dir, 5 * Time.deltaTime, 10);
+        Vector3 result = dir;// Vector3.RotateTowards(transform.up, dir, manualTurnSpeed * Time.deltaTime, 10);
+        result *= -1;
         transform.up = result;
         currentDirection = result;
         ClampRotation();
     }
     public void Release()
     {
+        isHolded = false;
+
+        //allowMove = true;
+        onReleaseAudio.Play(onReleaseAudio.SelectedAudioClip, audioSource);
+        OnDeadForce();
         OnRelease();
     }
     public void Hold()
     {
+        isHolded = true;
+
+        allowRotation = false;
+        allowMove = false;
         rigid.velocity = Vector3.zero;
+        onHoldAudio.Play(onHoldAudio.SelectedAudioClip, audioSource);
         OnHold();
     }
     protected virtual void OnRelease()
     {
-        allowMove = true;
-        //allowRotation = true;
     }
     protected virtual void OnHold()
     {
-        allowRotation = false;
-        allowMove = false;
+    }
+    protected virtual void OnDeadForce()
+    {
+        rigid.gravityScale = 1;
+        Debug.DrawRay(transform.position, currentDirection * deadForcePower, Color.red, 5);
+        rigid.AddForce(currentDirection * deadForcePower, ForceMode2D.Impulse);
     }
     public void Init(Vector3 initialDirection = default, Transform target = null)
     {

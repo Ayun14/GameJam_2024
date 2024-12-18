@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FollowBullet : BaseBullet
 {
+    [SerializeField] protected float turnSpeed = 5;
     protected override void Move()
     {
         Vector3 targetDir = target.position - transform.position;
