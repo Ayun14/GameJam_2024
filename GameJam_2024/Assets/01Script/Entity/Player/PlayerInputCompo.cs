@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInputCompo : MonoBehaviour
@@ -8,7 +6,6 @@ public class PlayerInputCompo : MonoBehaviour
     public event Action OnJumpKeyEvent;
 
     public event Action OnMouseDownEvent;
-    public event Action<Vector2> OnMouseStayEvent;
     public event Action OnMouseUpEvent;
 
     public Vector2 InputDirection { get; private set; }
@@ -23,9 +20,11 @@ public class PlayerInputCompo : MonoBehaviour
 
     private void Update()
     {
+        MouseInput();
+
+        if (_isMouseDown) return;
         MovementInput();
         JumpInput();
-        MouseInput();
     }
 
     private void JumpInput()
@@ -48,12 +47,6 @@ public class PlayerInputCompo : MonoBehaviour
         {
             OnMouseUpEvent?.Invoke();
             _isMouseDown = false;
-        }
-
-        if (true == _isMouseDown)
-        {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            OnMouseStayEvent?.Invoke(mousePos);
         }
     }
 

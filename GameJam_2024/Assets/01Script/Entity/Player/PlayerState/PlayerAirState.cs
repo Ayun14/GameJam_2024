@@ -16,12 +16,14 @@ public class PlayerAirState : EntityState
         base.Enter();
         _mover.SetMoveSpeedMultiplier(0.7f);
         _player.InputCompo.OnJumpKeyEvent += HandleAirJump;
+        _player.InputCompo.OnMouseDownEvent += HandleCatch;
     }
 
     public override void Exit()
     {
         _mover.SetMoveSpeedMultiplier(1f);
         _player.InputCompo.OnJumpKeyEvent -= HandleAirJump;
+        _player.InputCompo.OnMouseDownEvent -= HandleCatch;
         base.Exit();
     }
 
@@ -40,6 +42,15 @@ public class PlayerAirState : EntityState
         if (_player.CanAirJump)
         {
             _player.ChangeState("Jump");
+        }
+    }
+
+    private void HandleCatch()
+    {
+        // 범위 체크
+        if (_player.IsCanCatch())
+        {
+            _player.ChangeState("Catch");
         }
     }
 }

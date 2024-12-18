@@ -2,11 +2,8 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerAirState
 {
-    private EntityRenderer _renderer;
-
     public PlayerJumpState(Entity entity, AnimatorParamSO stateParam) : base(entity, stateParam)
     {
-        _renderer = entity.GetCompo<EntityRenderer>();
     }
 
     public override void Enter()
