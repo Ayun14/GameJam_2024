@@ -37,6 +37,7 @@ public abstract class BaseBullet : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         rigid = GetComponent<Rigidbody2D>();
+        transform.up = currentDirection;
     }
     private void Update()
     {
