@@ -99,6 +99,9 @@ public abstract class BaseBullet : MonoBehaviour
     public void Hold()
     {
         isHolded = true;
+        if (TryGetComponent(out Collider2D currentCollider))
+            currentCollider.enabled = false;
+        else Debug.LogWarning("bullet has no collider");
 
         allowRotation = false;
         allowMove = false;
