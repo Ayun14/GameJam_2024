@@ -41,6 +41,13 @@ public abstract class BaseBullet : MonoBehaviour
             transform.up = currentDirection;
             ClampRotation();
         }
+        Vector3 min = BulletBoundary.Instance.Min;
+        Vector3 max = BulletBoundary.Instance.Max;
+        if (transform.position.x < min.x || transform.position.y < min.y || 
+            transform.position.x > max.x || transform.position.y > max.y)
+        {
+            Destroy(gameObject);
+        }
 #if BULLETDEBUG
 
         if (Input.GetKeyDown(KeyCode.K))
