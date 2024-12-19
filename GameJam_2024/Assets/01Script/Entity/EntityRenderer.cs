@@ -20,7 +20,7 @@ public class EntityRenderer : AnimatorRenderer, IEntityComponent
 
     public void FlipController(float normalizedXMove)
     {
-        if (Mathf.Abs(FacingDirection + normalizedXMove) < 0.5f)
+        if (Mathf.Abs(FacingDirection + normalizedXMove) < 1f)
             Flip();
     }
 

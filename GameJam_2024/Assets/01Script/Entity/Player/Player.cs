@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Player : Entity
 {
@@ -19,7 +20,7 @@ public class Player : Entity
     [SerializeField] private float _dashPower;
     [SerializeField] private float _catchRadius;
     [SerializeField] private LayerMask _whatIsBullet;
-    [HideInInspector] public DashEffect dashEffect;
+    public DashEffect dashEffect;
     [HideInInspector] public Arrow arrow;
     [HideInInspector] public BaseBullet catchedBullet;
 
@@ -34,8 +35,8 @@ public class Player : Entity
         base.AfterInitialize();
         InputCompo = GetComponent<PlayerInputCompo>();
         _mover = GetCompo<EntityMover>();
-        dashEffect = transform.Find("DashEffect").GetComponent<DashEffect>();
-        dashEffect.gameObject.SetActive(false);
+
+        ResetJumpCount();
 
         // Arrow
         arrow = transform.Find("Arrow").GetComponent<Arrow>();
@@ -87,7 +88,7 @@ public class Player : Entity
 
     public void Dash()
     {
-        _mover.KnockBack(GetMouseDirection(transform) * _dashPower, 0.7f);
+        _mover.KnockBack(GetMouseDirection(transform) * _dashPower);
     }
 
     public Vector3 GetMouseDirection(Transform trm)
@@ -98,9 +99,16 @@ public class Player : Entity
         return (mousePosition - trm.position).normalized;
     }
 
+    public void SpawnDashEffect()
+    {
+        DashEffect effect = Instantiate(dashEffect, catchedBullet.transform.position, Quaternion.identity);
+        effect.DashEffectPlay();
+    }
+
     public void ResetJumpCount()
     {
         CurrentJumpCount = jumpCount;
+        GetCompo<EntityRenderer>().Jump(jumpCountParam, CurrentJumpCount);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
