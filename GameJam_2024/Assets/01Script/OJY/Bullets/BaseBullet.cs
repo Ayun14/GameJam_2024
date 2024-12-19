@@ -141,6 +141,11 @@ public abstract class BaseBullet : MonoBehaviour
     {
         OnDead();
     }
+    public void Kill()
+    {
+        OnDead();
+    }
+
     private void OnDead()
     {
         Instantiate(onDeadPrefab, onDeadTransform.position, Quaternion.identity, null);

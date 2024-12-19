@@ -2,6 +2,7 @@ using DG.Tweening;
 using Hellmade.Sound;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -20,6 +21,9 @@ public class ButtonController : MonoBehaviour
 
     [SerializeField] private AudioMixer _audioMixer;
 
+    [SerializeField] private TextMeshProUGUI _bestHeight;
+    [SerializeField] private TextMeshProUGUI _bestTime;
+
     private void Start()
     {
         SoundController.Instance.PlayBGM(0);
@@ -29,7 +33,7 @@ public class ButtonController : MonoBehaviour
 
     private void DataLoad()
     {
-        SaveController.Instance.LoadData();
+        LoadData();
 
         if (!PlayerPrefs.HasKey("BGM"))
             SaveController.Instance.SaveBGM(_musicSlider.value);
@@ -48,10 +52,25 @@ public class ButtonController : MonoBehaviour
         }
     }
 
+    public void LoadData()
+    {
+        if (PlayerPrefs.HasKey("Height"))
+            _bestHeight.text = PlayerPrefs.GetInt("Height").ToString() + " M";
+        if (PlayerPrefs.HasKey("Time"))
+            _bestTime.text = PlayerPrefs.GetString("Time");
+    }
+
     public void OnStartButton()
     {
         ButtonClickSound();
-        StartCoroutine(Fade());
+        StartCoroutine(Fade("MainScene"));
+    }
+
+    public void OnTutotialButton()
+    {
+        ButtonClickSound();
+        // ø©±‚ ∆©≈‰∏ÆæÛ æ¿¿∏∑Œ πŸ≤„¡‡æﬂ«‘
+        StartCoroutine(Fade("MainScene"));
     }
 
     public void OnSettingButton()
@@ -75,13 +94,13 @@ public class ButtonController : MonoBehaviour
         StartCoroutine(ShowSetting(false));
     }
 
-    private IEnumerator Fade()
+    private IEnumerator Fade(string sceneName)
     {
         _fadeCanvas.alpha = 0;
         Tween tween = _fadeCanvas.DOFade(1f, 1f);
         yield return tween.WaitForCompletion();
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene(sceneName);
     }
 
     private IEnumerator ShowSetting(bool isOpen)

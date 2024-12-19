@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -10,6 +11,8 @@ public class TimelineController : MonoBehaviour
     [SerializeField] private CanvasGroup _endingCanvas;
     [SerializeField] private CanvasGroup _keyInputCanvas;
     [SerializeField] private Canvas _meterCanvas;
+    [SerializeField] private MeterController _meterController;
+
 
     private Player _player;
 
@@ -44,6 +47,7 @@ public class TimelineController : MonoBehaviour
     {
         if (other.TryGetComponent(out Player player))
         {
+            _meterController.SaveTime();
             SoundController.Instance.PlayBGM(2);
 
             _player = player;
