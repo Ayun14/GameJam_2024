@@ -57,7 +57,8 @@ public abstract class BaseBullet : MonoBehaviour
         allowMove = true;
         allowRotation = true;
         isHolded = false;
-        
+        rigid.velocity = Vector3.zero;//?
+
         //need to call this.Init(); every pool
     }
     private void Update()
@@ -101,6 +102,9 @@ public abstract class BaseBullet : MonoBehaviour
     /// call this function when rotating player arrow
     /// </summary>
     /// <param name="dir">dir of player arrow</param>
+    public virtual void ApplyAdditional()
+    {
+    }
     public void Rotate(Vector3 dir)
     {
         Vector3 result = dir;

@@ -1,6 +1,9 @@
 public class ParabolaBullet : BaseBullet
 {
-    private void Start()
+    //private void Start()
+    //{
+    //}
+    public override void ApplyAdditional()
     {
         rigid.velocity = currentDirection * speed;
     }

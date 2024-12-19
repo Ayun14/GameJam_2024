@@ -14,6 +14,7 @@ public class BulletInstantiatorDouble : BaseBulletInstantiatorSO
             if (go.TryGetComponent(out BaseBullet bullet))
             {
                 bullet.Init(dir, speed);
+                bullet.ApplyAdditional();
             }
         }
         Create(direction);

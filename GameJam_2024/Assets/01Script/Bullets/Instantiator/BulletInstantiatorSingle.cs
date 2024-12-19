@@ -13,6 +13,7 @@ public class BulletInstantiatorSingle : BaseBulletInstantiatorSO
         if (go.TryGetComponent(out BaseBullet bullet))
         {
             bullet.Init(direction, speed);
+            bullet.ApplyAdditional();
         }
     }
 }
