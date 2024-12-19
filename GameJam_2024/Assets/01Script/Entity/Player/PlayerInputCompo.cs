@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerInputCompo : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PlayerInputCompo : MonoBehaviour
 
     public Vector2 InputDirection { get; private set; }
     private bool _isMouseDown = false;
+    public bool isEnding = false;
+    public bool isAnyKeyPress = false;
 
     private Player _player;
 
@@ -20,11 +23,19 @@ public class PlayerInputCompo : MonoBehaviour
 
     private void Update()
     {
-        MouseInput();
+        if (isEnding)
+        {
+            if (Input.anyKeyDown && isAnyKeyPress)
+                SceneManager.LoadScene("TitleScene");
+        }
+        else
+        {
+            MouseInput();
 
-        if (_isMouseDown) return;
-        MovementInput();
-        JumpInput();
+            if (_isMouseDown) return;
+            MovementInput();
+            JumpInput();
+        }
     }
 
     private void JumpInput()
