@@ -322,10 +322,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c584b746bdc66c4e9c59dac8e1a0d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletPoolName: Parabola
   speed: 10
   deadForcePower: 21
-  onDeadPrefab: {fileID: 3537005438603931011, guid: dd7fb64108623d641bd903d883a1d32c, type: 3}
-  onDeadTransform: {fileID: 241794799314506263, guid: dd7fb64108623d641bd903d883a1d32c, type: 3}
+  onDeadTransform: {fileID: 6834070057217851970}
   visualSprite: {fileID: 4183705756060230888}
 --- !u!1 &5791919500922116284
 GameObject:
