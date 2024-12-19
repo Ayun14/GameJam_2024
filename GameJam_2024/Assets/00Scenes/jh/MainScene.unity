@@ -101880,18 +101880,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 801205426167924644, guid: cc6edd129da6669498e2d89487b14df0, type: 3}
-      propertyPath: jumpPower
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 801205426167924644, guid: cc6edd129da6669498e2d89487b14df0, type: 3}
-      propertyPath: _catchRadius
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1420514884264210242, guid: cc6edd129da6669498e2d89487b14df0, type: 3}
-      propertyPath: _shakeTime
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 1420514884264210242, guid: cc6edd129da6669498e2d89487b14df0, type: 3}
       propertyPath: _virtualCamera
       value: 
@@ -101899,14 +101887,6 @@ PrefabInstance:
     - target: {fileID: 2267461057608650818, guid: cc6edd129da6669498e2d89487b14df0, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6995753639645681742, guid: cc6edd129da6669498e2d89487b14df0, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6995753639645681742, guid: cc6edd129da6669498e2d89487b14df0, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6995753639645681742, guid: cc6edd129da6669498e2d89487b14df0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -101948,17 +101928,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7057495568249292591, guid: cc6edd129da6669498e2d89487b14df0, type: 3}
-      propertyPath: m_LinearDrag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7057495568249292591, guid: cc6edd129da6669498e2d89487b14df0, type: 3}
-      propertyPath: m_Interpolate
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 6535941540326705985, guid: cc6edd129da6669498e2d89487b14df0, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc6edd129da6669498e2d89487b14df0, type: 3}

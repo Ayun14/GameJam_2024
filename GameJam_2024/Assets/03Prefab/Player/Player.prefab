@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _virtualCamera: {fileID: 0}
-  _shakeTime: 0
+  _shakeTime: 0.1
 --- !u!1 &588717108935000390
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +149,7 @@ Rigidbody2D:
   m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 3
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6e6ed6ff5e5c54e4f9a91ea5ba6e509e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -169,7 +169,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 2267461057608650818}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6e6ed6ff5e5c54e4f9a91ea5ba6e509e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -223,12 +223,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2056e22c56738994ead2978423bd91e8, type: 2}
   - {fileID: 11400000, guid: 0acff581d1710784da670e12b30958a2, type: 2}
   jumpCountParam: {fileID: 11400000, guid: 795c25ff670dbd44cbce32fcd074d3ab, type: 2}
-  _dashPower: 15
+  _dashPower: 20
   _catchRadius: 3
   _whatIsBullet:
     serializedVersion: 2
     m_Bits: 8
-  dashEffect: {fileID: 0}
+  dashEffect: {fileID: 3987639856963874386, guid: 03d5865da6b3746639acdd263470d2bb, type: 3}
   arrow: {fileID: 0}
   catchedBullet: {fileID: 0}
 --- !u!114 &3405870623045230360
