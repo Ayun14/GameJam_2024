@@ -1,24 +1,21 @@
 using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.SceneManagement;
 
 public class TimelineController : MonoBehaviour
 {
     [SerializeField] private PlayableDirector _endingTimeline;
-    [SerializeField] private Player _player;
     [SerializeField] private CanvasGroup _fadeCanvas;
+    [SerializeField] private CanvasGroup _endingCanvas;
+    [SerializeField] private CanvasGroup _keyInputCanvas;
+    [SerializeField] private Canvas _meterCanvas;
+
+    private Player _player;
 
     private void Awake()
     {
         _endingTimeline = GetComponent<PlayableDirector>();
-    }
-
-    public void SetPlayerPosition()
-    {
-        _player.GetComponent<Animator>().enabled = true;
     }
 
     public void EndTimeline()
@@ -29,17 +26,29 @@ public class TimelineController : MonoBehaviour
     private IEnumerator Fade()
     {
         _fadeCanvas.alpha = 0;
-        Tween tween = _fadeCanvas.DOFade(1f, 1f);
+        _endingCanvas.alpha = 0;
+        _keyInputCanvas.alpha = 0;
+        Tween tween = _fadeCanvas.DOFade(1f, 2.5f);
         yield return tween.WaitForCompletion();
-        yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene("TitleScene");
+        tween = _endingCanvas.DOFade(1f, 2f);
+        yield return tween.WaitForCompletion();
+        _keyInputCanvas.DOFade(1f, 1f);
+
+        if (_player != null)
+            _player.InputCompo.isAnyKeyPress = true;
+
+        _endingTimeline.Stop();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out Player player))
         {
-            _endingTimeline.Play();
+            SoundController.Instance.PlayBGM(2);
+
+            _player = player;
+            _meterCanvas.enabled = false;
+            player.StartEndingTimeline(_endingTimeline);
         }
     }
 }

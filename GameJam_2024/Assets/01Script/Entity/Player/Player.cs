@@ -1,7 +1,8 @@
+using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine.Playables;
 
 public class Player : Entity
 {
@@ -23,6 +24,9 @@ public class Player : Entity
     public DashEffect dashEffect;
     [HideInInspector] public Arrow arrow;
     [HideInInspector] public BaseBullet catchedBullet;
+
+    [Header("Ending Timeline")]
+    [SerializeField] private Transform _endingTrm;
 
     public float CurrentJumpCount { get; set; }
     public bool CanAirJump => CurrentJumpCount > 0;
@@ -124,4 +128,26 @@ public class Player : Entity
             ChangeState("Hit");
         }
     }
+
+    #region Timeline
+
+    public void StartEndingTimeline(PlayableDirector timeline)
+    {
+        InputCompo.isEnding = true;
+        StartCoroutine(EndingTimelineRoutine(timeline));
+    }
+
+    private IEnumerator EndingTimelineRoutine(PlayableDirector timeline)
+    {
+        yield return new WaitUntil(() => _mover.IsGroundDetected());
+        ChangeState("Idle");
+        timeline.Play();
+    }
+
+    public void MoveEndingPos()
+    {
+        transform.DOMoveX(_endingTrm.position.x, 3.5f);
+    }
+
+    #endregion
 }

@@ -3,15 +3,12 @@ using Hellmade.Sound;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ButtonController : MonoBehaviour
 {
-    [SerializeField] private Button _startButton;
-    [SerializeField] private Button _settingButton;
-    [SerializeField] private Button _exitButton;
-
     [SerializeField] private GameObject _settingCanvas;
     [SerializeField] private CanvasGroup _settingCanvasGroup;
     [SerializeField] private RectTransform _settingRectTransform;
@@ -21,9 +18,34 @@ public class ButtonController : MonoBehaviour
     [SerializeField] private Slider _musicSlider;
     [SerializeField] private Slider _sfxSlider;
 
+    [SerializeField] private AudioMixer _audioMixer;
+
     private void Start()
     {
         SoundController.Instance.PlayBGM(0);
+
+        DataLoad();
+    }
+
+    private void DataLoad()
+    {
+        SaveController.Instance.LoadData();
+
+        if (!PlayerPrefs.HasKey("BGM"))
+            SaveController.Instance.SaveBGM(_musicSlider.value);
+        else
+        {
+            _musicSlider.value = PlayerPrefs.GetFloat("BGM");
+            _audioMixer.SetFloat("BGM", Mathf.Log10(_musicSlider.value) * 20);
+        }
+
+        if (!PlayerPrefs.HasKey("SFX"))
+            SaveController.Instance.SaveSFX(_sfxSlider.value);
+        else
+        {
+            _sfxSlider.value = PlayerPrefs.GetFloat("SFX");
+            _audioMixer.SetFloat("SFX", Mathf.Log10(_sfxSlider.value) * 20);
+        }
     }
 
     public void OnStartButton()
@@ -76,12 +98,16 @@ public class ButtonController : MonoBehaviour
 
     public void BGMVolumeChange()
     {
-        EazySoundManager.GlobalMusicVolume = _musicSlider.value;
+        SaveController.Instance.SaveBGM(_musicSlider.value);
+
+        _audioMixer.SetFloat("BGM", Mathf.Log10(_musicSlider.value)*20);
     }
 
     public void SFXVolumeChange()
     {
-        EazySoundManager.GlobalSoundsVolume = _sfxSlider.value;
+        SaveController.Instance.SaveSFX(_sfxSlider.value);
+
+        _audioMixer.SetFloat("SFX", Mathf.Log10(_sfxSlider.value) * 20);
     }
 
     private void ButtonClickSound()
