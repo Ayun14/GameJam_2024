@@ -54,13 +54,13 @@ public class BaseEnemy : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= repeatDuration - animationAttackDuration && !isPlayed)
         {
-            print("playanimation" + timer);
+            //print("playanimation" + timer);
             enemyAnimator.Play(attackParam.hashValue, -1, 0);
             isPlayed = true;
         }
         if (timer >= repeatDuration)
         {
-            print("fire" + timer);
+            //print("fire" + timer);
             timer = 0;
             FireBullet();
             enemyAnimator.Play(idleParam.hashValue, -1, 0);
