@@ -43,7 +43,7 @@ public abstract class BaseBullet : MonoBehaviour
     protected Rigidbody2D rigid;
     private void Awake()
     {
-        SoundController.Instance.PlaySFX(7);
+        SoundController.Instance.PlaySFX(7,0.1f);
         audioSource = GetComponent<AudioSource>();
         rigid = GetComponent<Rigidbody2D>();
         transform.up = currentDirection;

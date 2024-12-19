@@ -26,7 +26,10 @@ public class PlayerCatchState : PlayerAirState
 
     public override void Update()
     {
-        _player.catchedBullet.Rotate(_player.GetMouseDirection(_player.arrow.transform));
+        if (_player.catchedBullet != null)
+        {
+            _player.catchedBullet.Rotate(_player.GetMouseDirection(_player.arrow.transform));
+        }
     }
 
     public override void Exit()
@@ -34,20 +37,22 @@ public class PlayerCatchState : PlayerAirState
         // 대쉬 하기
         if (_player.catchedBullet != null)
         {
-            _player.catchedBullet.Release();
+            // Particle
+            _player.dashParticle.transform.position = _player.catchedBullet.transform.position;
+            _player.dashParticle.Play();
+
+            // Sound
+            SoundController.Instance.PlaySFX(2);
+
             _player.transform.position = _player.catchedBullet.transform.position;
             _player.Dash();
+            _player.catchedBullet.Release();
+
+            _shaker.CameraShake();
+            _player.ResetJumpCount();
+
+            _player.catchedBullet = null;
         }
-
-        _shaker.CameraShake();
-        _player.ResetJumpCount();
-
-        // Sound
-        SoundController.Instance.PlaySFX(2);
-
-        // Particle
-        _player.dashParticle.transform.position = _player.catchedBullet.transform.position;
-        _player.dashParticle.Play();
 
         _player.InputCompo.OnMouseUpEvent -= HandleEndCatch;
         base.Exit();
