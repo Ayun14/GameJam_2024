@@ -45,8 +45,7 @@ public class PlayerCatchState : PlayerAirState
             _player.ResetJumpCount();
 
             // Particle
-            _player.dashEffect.gameObject.SetActive(true);
-            _player.dashEffect.DashEffectPlay();
+            _player.SpawnDashEffect();
 
             // Sound
             SoundController.Instance.PlaySFX(2);

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DashEffect : MonoBehaviour
@@ -11,11 +12,12 @@ public class DashEffect : MonoBehaviour
 
     public void DashEffectPlay()
     {
-        _animator.SetTrigger("Dash");
+        _animator.SetBool("Dash", true);
     }
 
     public void SetActiveFalse()
     {
         gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
