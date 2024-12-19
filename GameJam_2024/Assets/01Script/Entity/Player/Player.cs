@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Player : Entity
@@ -69,22 +70,18 @@ public class Player : Entity
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _catchRadius, Vector3.up, 0f, _whatIsBullet);
         if (hits.Length > 0)
         {
-            float minDistance = hits[0].distance;
-            RaycastHit2D firstHit = hits[0];
-            BaseBullet bullet = firstHit.transform.GetComponent<BaseBullet>();
-            foreach (RaycastHit2D hit in hits)
+            float minDistance = _catchRadius;
+            for (int i = 0; i < hits.Length; i++)
             {
-                bullet = hit.transform.GetComponent<BaseBullet>();
-                if (hit.distance < minDistance && bullet.IsHolded == false)
+                BaseBullet bullet = hits[i].transform.GetComponent<BaseBullet>();
+                if (hits[i].distance < minDistance && bullet.IsHolded == false)
                 {
-                    minDistance = hit.distance;
+                    minDistance = hits[i].distance;
                     catchedBullet = bullet;
                 }
             }
-            return true;
         }
-        catchedBullet = null;
-        return false;
+        return catchedBullet != null;
     }
 
     public void Dash()
