@@ -55,10 +55,11 @@ public abstract class BaseBullet : MonoBehaviour
             transform.up = currentDirection;
             ClampRotation();
         }
-        Vector3 min = BulletBoundary.Instance.Min;
-        Vector3 max = BulletBoundary.Instance.Max;
-        if (transform.position.x < min.x || transform.position.y < min.y || 
-            transform.position.x > max.x || transform.position.y > max.y)
+        //Vector3 min = BulletBoundary.Instance.Min;
+        //Vector3 max = BulletBoundary.Instance.Max;
+        //if (transform.position.x < min.x || transform.position.y < min.y || 
+        //    transform.position.x > max.x || transform.position.y > max.y)
+        if(!transform.IsPositionValid())
         {
             Destroy(gameObject);
         }
