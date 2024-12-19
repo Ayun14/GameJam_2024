@@ -1,7 +1,5 @@
 using DG.Tweening;
-using Hellmade.Sound;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -126,7 +124,7 @@ public class ButtonController : MonoBehaviour
         float endPosX = isOpen ? 380f : 1300f;
         Tween tween = _settingRectTransform.DOAnchorPosX(endPosX, 0.5f);
         yield return tween.WaitForCompletion();
-        if(!isOpen)
+        if (!isOpen)
         {
             _settingCanvasGroup.alpha = 0;
             _settingCanvas.SetActive(false);
@@ -149,7 +147,7 @@ public class ButtonController : MonoBehaviour
     {
         SaveController.Instance.SaveBGM(_musicSlider.value);
 
-        _audioMixer.SetFloat("BGM", Mathf.Log10(_musicSlider.value)*20);
+        _audioMixer.SetFloat("BGM", Mathf.Log10(_musicSlider.value) * 20);
     }
 
     public void SFXVolumeChange()

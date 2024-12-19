@@ -21,7 +21,6 @@ public class Player : Entity
     [SerializeField] private float _dashPower;
     [SerializeField] private float _catchRadius;
     [SerializeField] private LayerMask _whatIsBullet;
-    public DashEffect dashEffect;
     [HideInInspector] public Arrow arrow;
     [HideInInspector] public BaseBullet catchedBullet;
 
@@ -107,8 +106,9 @@ public class Player : Entity
 
     public void SpawnDashEffect()
     {
-        DashEffect effect = Instantiate(dashEffect, catchedBullet.transform.position, Quaternion.identity);
-        effect.DashEffectPlay();
+        GameObject go = PoolManager.Instance.Pop("DashEffect", catchedBullet.transform.position, Quaternion.identity);
+        if (go.TryGetComponent(out DashEffect effect))
+            effect.DashEffectPlay();
     }
 
     public void ResetJumpCount()
