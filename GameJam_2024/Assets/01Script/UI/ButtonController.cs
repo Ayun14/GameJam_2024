@@ -70,7 +70,7 @@ public class ButtonController : MonoBehaviour
     {
         ButtonClickSound();
         // ø©±‚ ∆©≈‰∏ÆæÛ æ¿¿∏∑Œ πŸ≤„¡‡æﬂ«‘
-        StartCoroutine(Fade("MainScene"));
+        StartCoroutine(Fade("TutorialScene"));
     }
 
     public void OnSettingButton()
