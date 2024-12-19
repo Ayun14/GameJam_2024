@@ -44,6 +44,8 @@ public class TimelineController : MonoBehaviour
     {
         if (other.TryGetComponent(out Player player))
         {
+            SoundController.Instance.PlayBGM(2);
+
             _player = player;
             _meterCanvas.enabled = false;
             player.StartEndingTimeline(_endingTimeline);

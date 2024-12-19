@@ -134,7 +134,6 @@ public class Player : Entity
     public void StartEndingTimeline(PlayableDirector timeline)
     {
         InputCompo.isEnding = true;
-        SoundController.Instance.PlayBGM(1);
         StartCoroutine(EndingTimelineRoutine(timeline));
     }
 
