@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseEnemy : MonoBehaviour
@@ -37,13 +35,13 @@ public class BaseEnemy : MonoBehaviour
     private void Awake()
     {
         enemyAnimator = GetComponent<Animator>();
-        if(spawnDirection == SpawnDirection.Left)
+        if (spawnDirection == SpawnDirection.Left)
         {
             Vector3 result = visualTransform.eulerAngles;
             result.y = 180;
             visualTransform.eulerAngles = result;
         }
-        if(spawnDirection == SpawnDirection.Up)
+        if (spawnDirection == SpawnDirection.Up)
         {
             Vector3 result = visualTransform.eulerAngles;
             result.z = 180;
@@ -96,7 +94,7 @@ public class BaseEnemy : MonoBehaviour
     }
     private void OnDrawGizmosSelected()
     {
-        if(firePos != null)
+        if (firePos != null)
         {
             Gizmos.DrawWireSphere(firePos.position, 0.2f);
             Gizmos.color = Color.red;

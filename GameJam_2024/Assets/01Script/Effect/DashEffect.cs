@@ -1,7 +1,6 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class DashEffect : MonoBehaviour
+public class DashEffect : BaseEffect
 {
     private Animator _animator;
 
@@ -18,6 +17,5 @@ public class DashEffect : MonoBehaviour
     public void SetActiveFalse()
     {
         gameObject.SetActive(false);
-        Destroy(gameObject);
     }
 }

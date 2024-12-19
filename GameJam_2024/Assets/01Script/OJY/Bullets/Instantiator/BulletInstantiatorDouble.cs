@@ -10,8 +10,13 @@ public class BulletInstantiatorDouble : BaseBulletInstantiatorSO
         void Create(Vector3 dir)
         {
             dir.Normalize();
-            BaseBullet result = Instantiate(prefab, instansiateTransform.position, Quaternion.identity);
-            result.Init(dir, speed);
+            //BaseBullet result = Instantiate(prefab, instansiateTransform.position, Quaternion.identity);
+            GameObject go = PoolManager.Instance.Pop("PurpleBall", instansiateTransform.position, Quaternion.identity);
+            
+            if (go.TryGetComponent(out BaseBullet bullet))
+            {
+                bullet.Init(dir, speed);
+            }
         }
         Create(direction);
         Create(-direction);
