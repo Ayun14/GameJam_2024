@@ -241,12 +241,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   deadForcePower: 21
-  onDeadPrefab: {fileID: 4423770569894467205}
+  onDeadPrefab: {fileID: 3537005438603931011, guid: dd7fb64108623d641bd903d883a1d32c, type: 3}
   onDeadTransform: {fileID: 241794799314506263, guid: dd7fb64108623d641bd903d883a1d32c, type: 3}
-  onHoldAudio: {fileID: 0}
   onReleaseEffect: {fileID: 8859666348391566620, guid: 032873863e1c2ef49842bbef1d5d6945, type: 3}
   onReleaseEffectTransform: {fileID: 6834070057217851970}
-  onReleaseAudio: {fileID: 0}
 --- !u!1 &5791919500922116284
 GameObject:
   m_ObjectHideFlags: 0

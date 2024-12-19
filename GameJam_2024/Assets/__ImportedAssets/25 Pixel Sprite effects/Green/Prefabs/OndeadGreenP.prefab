@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 667808503419134103}
   - component: {fileID: 4444876591130407935}
   m_Layer: 0
-  m_Name: Ef_22_green_p
+  m_Name: OndeadGreenP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
