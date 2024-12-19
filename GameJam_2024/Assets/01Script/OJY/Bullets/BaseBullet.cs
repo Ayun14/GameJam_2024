@@ -143,7 +143,7 @@ public abstract class BaseBullet : MonoBehaviour
     public void OnHighlightEnter()
     {
         //print("ent");
-        Color32 highlightEnterColor = new Color32(255, 224, 159, 255);
+        Color32 highlightEnterColor = new Color32(255, 153, 242, 255);
         visualSprite.color = highlightEnterColor;
     }
     public void OnHighlightExit()
