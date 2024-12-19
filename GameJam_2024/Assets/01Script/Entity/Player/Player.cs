@@ -72,13 +72,15 @@ public class Player : Entity
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _catchRadius, Vector3.up, 0f, _whatIsBullet);
         if (hits.Length > 0)
         {
-            float minDistance = _catchRadius;
+            float minDistance = Mathf.Infinity;
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             for (int i = 0; i < hits.Length; i++)
             {
                 BaseBullet bullet = hits[i].transform.GetComponent<BaseBullet>();
-                if (hits[i].distance < minDistance && bullet.IsHolded == false)
+                float distance = Vector2.Distance(mousePos, hits[i].point);
+                if (distance <= minDistance && bullet.IsHolded == false) //hits[i].distance
                 {
-                    minDistance = hits[i].distance;
+                    minDistance = distance;//hits[i].distance;
                     catchedBullet = bullet;
                 }
             }
