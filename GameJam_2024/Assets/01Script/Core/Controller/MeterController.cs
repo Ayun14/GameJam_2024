@@ -7,6 +7,7 @@ public class MeterController : MonoBehaviour
     [SerializeField] private Transform _playerTrm;
     [SerializeField] private float _meterY; // 얼마의 y값이 1M가 될 것 인지.
     [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private TextMeshProUGUI _playTimeText;
 
     private float _meter = 0;
     private float _maxMeter =0;
@@ -14,6 +15,9 @@ public class MeterController : MonoBehaviour
 
     private float _sec = 0;
     private int _min = 0;
+    private float _allTime =0;
+
+    private bool isPlaying = true;
 
     private void Start()
     {
@@ -22,7 +26,8 @@ public class MeterController : MonoBehaviour
 
     private void Update()
     {
-        Timer();
+        if (isPlaying)
+            Timer();
     }
 
     private void FixedUpdate()
@@ -44,6 +49,7 @@ public class MeterController : MonoBehaviour
 
     private void Timer()
     {
+        _allTime += Time.deltaTime;
         _sec += Time.deltaTime;
         if (_sec >= 60f)
         {
@@ -53,10 +59,20 @@ public class MeterController : MonoBehaviour
     }
 
     // 클리어 타임 저장할 때 사용
-    private void SaveTime()
+    public void SaveTime()
     {
-        SaveController.Instance.SaveTime(_min, _sec);
+        _playTimeText.text = $"클리어 하는데 걸린 시간은 {_min}:{(int)_sec} 입니다!";
+
+        isPlaying = false;
+
+        if(PlayerPrefs.GetFloat("MaxTime") < _allTime)
+        {
+            SaveController.Instance.SaveMaxTime(_allTime);
+            SaveController.Instance.SaveTime(_min, _sec);
+        }
+
         _min = 0;
         _sec = 0;
+        _allTime = 0;
     }
 }

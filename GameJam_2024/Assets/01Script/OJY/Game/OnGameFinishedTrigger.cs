@@ -6,6 +6,6 @@ public class OnGameFinishedTrigger : MonoBehaviour
 {
     public void SetGameToFinished()
     {
-        Game.GameFinished = false;
+        Game.GameFinished = true;
     }
 }
