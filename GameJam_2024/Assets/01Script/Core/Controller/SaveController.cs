@@ -6,8 +6,10 @@ using UnityEngine;
 
 public class SaveController : MonoSingleton<SaveController>
 {
-    [SerializeField] private TextMeshProUGUI _bestHeight;
-    [SerializeField] private TextMeshProUGUI _bestTime;
+    public void SaveMaxTime(float maxTime)
+    {
+        PlayerPrefs.SetFloat("MaxTime", maxTime);
+    }
 
     public void SaveHeight(float height)
     {
@@ -16,7 +18,7 @@ public class SaveController : MonoSingleton<SaveController>
 
     public void SaveTime(int min, float sec)
     {
-        PlayerPrefs.SetString("Time", string.Format("{0:D2}:{1:D2}", min, (int)min));
+        PlayerPrefs.SetString("Time", string.Format("{0}:{1}", min, (int)sec));
     }
 
     public void SaveBGM(float bgm)
@@ -27,13 +29,5 @@ public class SaveController : MonoSingleton<SaveController>
     public void SaveSFX(float sfx)
     {
         PlayerPrefs.SetFloat("SFX", sfx);
-    }
-
-    public void LoadData()
-    {
-        if(PlayerPrefs.HasKey("Height"))
-            _bestHeight.text = PlayerPrefs.GetInt("Height").ToString() + " M";
-        if (PlayerPrefs.HasKey("Time"))
-            _bestTime.text = PlayerPrefs.GetString("Time");
     }
 }

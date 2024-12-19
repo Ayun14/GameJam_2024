@@ -108188,6 +108188,7 @@ MonoBehaviour:
   _playerTrm: {fileID: 1698540749}
   _meterY: 2.23
   _text: {fileID: 134797080}
+  _playTimeText: {fileID: 924055683}
 --- !u!4 &1703464702
 Transform:
   m_ObjectHideFlags: 0
@@ -116278,6 +116279,7 @@ MonoBehaviour:
   _endingCanvas: {fileID: 1354954625}
   _keyInputCanvas: {fileID: 587709378}
   _meterCanvas: {fileID: 664647306}
+  _meterController: {fileID: 1703464701}
 --- !u!114 &1834823291
 MonoBehaviour:
   m_ObjectHideFlags: 0
