@@ -17,6 +17,7 @@ public abstract class BaseBullet : MonoBehaviour
     [SerializeField] protected float deadForcePower = 21;
     [SerializeField] private GameObject onDeadPrefab;
     [SerializeField] private Transform onDeadTransform;
+    [SerializeField] private SpriteRenderer visualSprite;
     //[SerializeField] private MiniPool miniPool;
 
     //[Header("Rotation")]
@@ -47,7 +48,7 @@ public abstract class BaseBullet : MonoBehaviour
     protected Rigidbody2D rigid;
     private void Awake()
     {
-        SoundController.Instance.PlaySFX(7,0.1f);
+        SoundController.Instance.PlaySFX(7, 0.1f);
         audioSource = GetComponent<AudioSource>();
         rigid = GetComponent<Rigidbody2D>();
         transform.up = currentDirection;
@@ -73,7 +74,7 @@ public abstract class BaseBullet : MonoBehaviour
         //Vector3 max = BulletBoundary.Instance.Max;
         //if (transform.position.x < min.x || transform.position.y < min.y || 
         //    transform.position.x > max.x || transform.position.y > max.y)
-        if(!transform.IsPositionValid())
+        if (!transform.IsPositionValid())
         {
             Destroy(gameObject);
         }
@@ -141,11 +142,15 @@ public abstract class BaseBullet : MonoBehaviour
     }
     public void OnHighlightEnter()
     {
-        print("ent");
+        //print("ent");
+        Color32 highlightEnterColor = new Color32(255, 224, 159, 255);
+        visualSprite.color = highlightEnterColor;
     }
     public void OnHighlightExit()
     {
-        print("exit");
+        //print("exit");
+        Color32 highlightEnterColor = new Color32(255, 255, 255, 255);
+        visualSprite.color = highlightEnterColor;
     }
 
     protected virtual void OnDeadForce()
@@ -157,12 +162,12 @@ public abstract class BaseBullet : MonoBehaviour
     public void Init(Vector3 initialDirection = default, float speed = 0)
     {
         currentDirection = initialDirection;
-        if(!Mathf.Approximately(speed, 0))
+        if (!Mathf.Approximately(speed, 0))
             this.speed = speed;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer != 9)
+        if (collision.gameObject.layer != 9)
             OnDead();
     }
     public void Kill()
@@ -175,5 +180,5 @@ public abstract class BaseBullet : MonoBehaviour
         Instantiate(onDeadPrefab, onDeadTransform.position, Quaternion.identity, null);
         Destroy(gameObject);
     }
-   
+
 }

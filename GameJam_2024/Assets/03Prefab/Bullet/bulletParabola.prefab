@@ -326,8 +326,7 @@ MonoBehaviour:
   deadForcePower: 21
   onDeadPrefab: {fileID: 3537005438603931011, guid: dd7fb64108623d641bd903d883a1d32c, type: 3}
   onDeadTransform: {fileID: 241794799314506263, guid: dd7fb64108623d641bd903d883a1d32c, type: 3}
-  onReleaseEffect: {fileID: 8859666348391566620, guid: 032873863e1c2ef49842bbef1d5d6945, type: 3}
-  onReleaseEffectTransform: {fileID: 6834070057217851970}
+  visualSprite: {fileID: 4183705756060230888}
 --- !u!1 &5791919500922116284
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,6 +459,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7472201424960212659, guid: 6b810db935d66af40bf1d772f51c27a5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8980441295646562875, guid: 6b810db935d66af40bf1d772f51c27a5, type: 3}
       propertyPath: m_Name
       value: Visual_PurpleBall
@@ -469,6 +472,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b810db935d66af40bf1d772f51c27a5, type: 3}
+--- !u!212 &4183705756060230888 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7472201424960212659, guid: 6b810db935d66af40bf1d772f51c27a5, type: 3}
+  m_PrefabInstance: {fileID: 6754578807062129243}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4680792260337028448 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2110101771104331579, guid: 6b810db935d66af40bf1d772f51c27a5, type: 3}

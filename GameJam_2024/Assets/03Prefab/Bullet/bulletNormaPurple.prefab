@@ -302,8 +302,7 @@ MonoBehaviour:
   deadForcePower: 21
   onDeadPrefab: {fileID: 3537005438603931011, guid: dd7fb64108623d641bd903d883a1d32c, type: 3}
   onDeadTransform: {fileID: 1354466839341068167}
-  onReleaseEffect: {fileID: 8859666348391566620, guid: 032873863e1c2ef49842bbef1d5d6945, type: 3}
-  onReleaseEffectTransform: {fileID: 7680716709978341126}
+  visualSprite: {fileID: 8907586530605143760}
 --- !u!58 &9017941406287923241
 CircleCollider2D:
   m_ObjectHideFlags: 0
