@@ -32,6 +32,7 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField] private float animationAttackDuration;
     private Animator enemyAnimator;
     private bool isPlayed;
+
     //[SerializeField] private bool parabolaPreview;
     private void Awake()
     {
@@ -51,6 +52,7 @@ public class BaseEnemy : MonoBehaviour
     }
     private void Update()
     {
+        if (Game.GameFinished) return;
         timer += Time.deltaTime;
         if (timer >= repeatDuration - animationAttackDuration && !isPlayed)
         {
