@@ -356,7 +356,7 @@ Transform:
   m_GameObject: {fileID: 35270102}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 333, z: -10}
+  m_LocalPosition: {x: 0, y: 333, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -102497,7 +102497,7 @@ Transform:
   m_GameObject: {fileID: 416393327}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 333, z: -10}
+  m_LocalPosition: {x: 0, y: 333, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -102526,7 +102526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6995753639645681742, guid: cc6edd129da6669498e2d89487b14df0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6995753639645681742, guid: cc6edd129da6669498e2d89487b14df0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -105093,6 +105093,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 470226605489782476, guid: 803c4ad97d47a9e45b19fb53ba4cdc2d, type: 3}
   m_PrefabInstance: {fileID: 502182617}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &519482545 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1679533476862815831, guid: 09c3c9b857c25824587a1b42391b1b51, type: 3}
+  m_PrefabInstance: {fileID: 1725214350}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &529355470
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -107011,6 +107022,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 698798849}
     m_Modifications:
+    - target: {fileID: 1978115442382429407, guid: b574cc9db42fa8646a913f9e62b99c5d, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 2521855282411159197, guid: b574cc9db42fa8646a913f9e62b99c5d, type: 3}
       propertyPath: m_Name
       value: Chest
@@ -109661,6 +109676,7 @@ MonoBehaviour:
   _playerTrm: {fileID: 1698540749}
   _meterY: 2.23
   _text: {fileID: 134797080}
+  _playTimeText: {fileID: 519482545}
 --- !u!4 &1703464702
 Transform:
   m_ObjectHideFlags: 0
@@ -119016,6 +119032,7 @@ MonoBehaviour:
   _endingCanvas: {fileID: 1725214351}
   _keyInputCanvas: {fileID: 1556253382}
   _meterCanvas: {fileID: 134797081}
+  _meterController: {fileID: 1703464701}
 --- !u!114 &2083696603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119099,8 +119116,6 @@ PlayableDirector:
     value: {fileID: 2083696603}
   - key: {fileID: -2513142543651663245, guid: a2ff98c8f63be4b4caf067a35cabf102, type: 2}
     value: {fileID: 35270107}
-  - key: {fileID: 763903977634276526, guid: a2ff98c8f63be4b4caf067a35cabf102, type: 2}
-    value: {fileID: 902711955}
   m_ExposedReferences:
     m_References:
     - 62150b32fc84dde46b5aee1ac8605f4b: {fileID: 416393328}
