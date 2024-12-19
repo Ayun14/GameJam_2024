@@ -40,8 +40,14 @@ public class PlayerCatchState : PlayerAirState
         }
 
         _shaker.CameraShake();
-        SoundController.Instance.PlaySFX(2);
         _player.ResetJumpCount();
+
+        // Sound
+        SoundController.Instance.PlaySFX(2);
+
+        // Particle
+        _player.dashParticle.transform.position = _player.catchedBullet.transform.position;
+        _player.dashParticle.Play();
 
         _player.InputCompo.OnMouseUpEvent -= HandleEndCatch;
         base.Exit();
