@@ -5,20 +5,27 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class BaseBullet : MonoBehaviour
 {
+    private static class Cache
+    {
+        public static readonly LayerMask playerLayer = LayerMask.GetMask("Player");
+    }
     [Header("General")]
     [SerializeField] protected float speed = 5;
     [SerializeField] protected float deadForcePower = 21;
+    [SerializeField] private GameObject onDeadPrefab;
+    [SerializeField] private Transform onDeadTransform;
 
     //[Header("Rotation")]
     //[SerializeField] private float _rotationSpeed;
 
-    [Header("OnHold")]
-    [SerializeField] protected AudioClipsSO onHoldAudio;
+
+    //[Header("OnHold")]
+    //[SerializeField] protected AudioClip onHoldAudio;
 
     [Header("OnRelease")]
     [SerializeField] protected GameObject onReleaseEffect;
     [SerializeField] protected Transform onReleaseEffectTransform;
-    [SerializeField] protected AudioClipsSO onReleaseAudio;
+    //[SerializeField] protected AudioClip onReleaseAudio;
 
 
 #if BULLETDEBUG
@@ -29,12 +36,14 @@ public abstract class BaseBullet : MonoBehaviour
     protected bool allowMove = true;
     protected bool allowRotation = true;
     protected bool isHolded;
+    public bool IsHolded => isHolded;
     protected Vector3 currentDirection;
 
     protected AudioSource audioSource;
     protected Rigidbody2D rigid;
     private void Awake()
     {
+        SoundController.Instance.PlaySFX(7);
         audioSource = GetComponent<AudioSource>();
         rigid = GetComponent<Rigidbody2D>();
         transform.up = currentDirection;
@@ -89,10 +98,8 @@ public abstract class BaseBullet : MonoBehaviour
     }
     public void Release()
     {
-        isHolded = false;
-
         //allowMove = true;
-        onReleaseAudio.Play(onReleaseAudio.SelectedAudioClip, audioSource);
+        //onReleaseAudio.Play(onReleaseAudio.SelectedAudioClip, audioSource);
         Instantiate(onReleaseEffect, onReleaseEffectTransform.position, onReleaseEffectTransform.rotation, onReleaseEffectTransform);
         OnDeadForce();
         OnRelease();
@@ -101,13 +108,14 @@ public abstract class BaseBullet : MonoBehaviour
     {
         isHolded = true;
         if (TryGetComponent(out Collider2D currentCollider))
-            currentCollider.enabled = false;
+            currentCollider.excludeLayers = Cache.playerLayer;
         else Debug.LogWarning("bullet has no collider");
 
         allowRotation = false;
         allowMove = false;
         rigid.velocity = Vector3.zero;
-        onHoldAudio.Play(onHoldAudio.SelectedAudioClip, audioSource);
+        SoundController.Instance.PlaySFX(1);
+        //onHoldAudio.Play(onHoldAudio.SelectedAudioClip, audioSource);
         OnHold();
     }
     protected virtual void OnRelease()
@@ -130,6 +138,11 @@ public abstract class BaseBullet : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        OnDead();
+    }
+    private void OnDead()
+    {
+        Instantiate(onDeadPrefab, onDeadTransform.position, Quaternion.identity, null);
         Destroy(gameObject);
     }
    
