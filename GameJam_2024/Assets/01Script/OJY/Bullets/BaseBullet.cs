@@ -10,11 +10,14 @@ public abstract class BaseBullet : MonoBehaviour
     {
         public static readonly LayerMask playerLayer = LayerMask.GetMask("Player");
     }
+
     [Header("General")]
     [SerializeField] protected float speed = 5;
+
     [SerializeField] protected float deadForcePower = 21;
     [SerializeField] private GameObject onDeadPrefab;
     [SerializeField] private Transform onDeadTransform;
+    //[SerializeField] private MiniPool miniPool;
 
     //[Header("Rotation")]
     //[SerializeField] private float _rotationSpeed;
@@ -23,9 +26,9 @@ public abstract class BaseBullet : MonoBehaviour
     //[Header("OnHold")]
     //[SerializeField] protected AudioClip onHoldAudio;
 
-    [Header("OnRelease")]
-    [SerializeField] protected GameObject onReleaseEffect;
-    [SerializeField] protected Transform onReleaseEffectTransform;
+    //[Header("OnRelease")]
+    //[SerializeField] protected GameObject onReleaseEffect;
+    //[SerializeField] protected Transform onReleaseEffectTransform;
     //[SerializeField] protected AudioClip onReleaseAudio;
 
 
@@ -112,7 +115,7 @@ public abstract class BaseBullet : MonoBehaviour
     {
         //allowMove = true;
         //onReleaseAudio.Play(onReleaseAudio.SelectedAudioClip, audioSource);
-        Instantiate(onReleaseEffect, onReleaseEffectTransform.position, onReleaseEffectTransform.rotation, onReleaseEffectTransform);
+        //Instantiate(onReleaseEffect, onReleaseEffectTransform.position, onReleaseEffectTransform.rotation, onReleaseEffectTransform);
         OnDeadForce();
         OnRelease();
     }
