@@ -243,7 +243,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00:00
+  m_text: 00m 00s
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e2759e7abc692bf469cbc0f8a568ec56, type: 2}
   m_sharedMaterial: {fileID: 4029751955152536101, guid: e2759e7abc692bf469cbc0f8a568ec56, type: 2}
@@ -689,6 +689,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 274105558}
+    - target: {fileID: 2686583605432051208, guid: bf154ac0399549f4099ba1334fee5e3b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnTutotialButton
+      objectReference: {fileID: 0}
     - target: {fileID: 3483761614157833375, guid: bf154ac0399549f4099ba1334fee5e3b, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -1100,7 +1104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d69a12921c4d67408dea57df7bce20c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 0
 --- !u!1 &371655193
 GameObject:
   m_ObjectHideFlags: 0
@@ -4103,7 +4106,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 104.9, y: 63.6}
+  m_AnchoredPosition: {x: 104.8999, y: 63.599976}
   m_SizeDelta: {x: 700, y: 700}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1865742638

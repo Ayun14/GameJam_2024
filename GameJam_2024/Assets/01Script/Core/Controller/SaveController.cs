@@ -18,7 +18,7 @@ public class SaveController : MonoSingleton<SaveController>
 
     public void SaveTime(int min, float sec)
     {
-        PlayerPrefs.SetString("Time", string.Format("{0}:{1}", min, (int)sec));
+        PlayerPrefs.SetString("Time", string.Format("{0}m {1}s", min, (int)sec));
     }
 
     public void SaveBGM(float bgm)

@@ -61,7 +61,7 @@ public class MeterController : MonoBehaviour
     // 클리어 타임 저장할 때 사용
     public void SaveTime()
     {
-        _playTimeText.text = $"클리어 하는데 걸린 시간은 {_min}:{(int)_sec} 입니다!";
+        _playTimeText.text = $"클리어 하는데 걸린 시간은 {_min}분 {(int)_sec}초 입니다!";
 
         isPlaying = false;
 
