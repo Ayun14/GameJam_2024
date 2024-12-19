@@ -298,12 +298,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 305209beb251a944ab3551ff896cd3e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletPoolName: PurpleBall
   speed: 5
   deadForcePower: 21
-  onDeadPrefab: {fileID: 3537005438603931011, guid: dd7fb64108623d641bd903d883a1d32c, type: 3}
   onDeadTransform: {fileID: 1354466839341068167}
-  onReleaseEffect: {fileID: 8859666348391566620, guid: 032873863e1c2ef49842bbef1d5d6945, type: 3}
-  onReleaseEffectTransform: {fileID: 7680716709978341126}
 --- !u!58 &9017941406287923241
 CircleCollider2D:
   m_ObjectHideFlags: 0
