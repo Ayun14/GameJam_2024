@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RedBulletAnimator
+  m_Controller: {fileID: 9100000, guid: d916030c44e366e4fad7c46ff1c9f0df, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: e1e4052246a8ded48877acdff0ddf44e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3416754d04c58b748817168082c22c8e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: f6ba0e4179fcb8a43b051bdf809ae813, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 693531d502d02604aadb311d0f4798b5, type: 2}
