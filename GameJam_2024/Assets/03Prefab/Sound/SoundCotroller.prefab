@@ -46,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bgmClips:
   - {fileID: 8300000, guid: 28d03219628917e4c981a5ad1c3b908d, type: 3}
-  - {fileID: 8300000, guid: 1ebd75f481862724c997cd47fb9286e6, type: 3}
   - {fileID: 8300000, guid: f1af8ee6cc8bd0840a8da62c74664378, type: 3}
+  - {fileID: 8300000, guid: 1ebd75f481862724c997cd47fb9286e6, type: 3}
   _sfxClips:
   - {fileID: 8300000, guid: 3ae9d26773d6d3d4591eabb73384de80, type: 3}
   - {fileID: 8300000, guid: 8fa06a67871c2724d9135e7ff57f5bd7, type: 3}

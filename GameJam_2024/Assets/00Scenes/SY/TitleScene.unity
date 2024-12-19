@@ -4406,6 +4406,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundCotroller
       objectReference: {fileID: 0}
+    - target: {fileID: 4905781521938738522, guid: 44c2cf0874a5aee4695a4b8495c4b42c, type: 3}
+      propertyPath: _bgmClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: f1af8ee6cc8bd0840a8da62c74664378, type: 3}
+    - target: {fileID: 4905781521938738522, guid: 44c2cf0874a5aee4695a4b8495c4b42c, type: 3}
+      propertyPath: _bgmClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1ebd75f481862724c997cd47fb9286e6, type: 3}
     - target: {fileID: 5790894746342475499, guid: 44c2cf0874a5aee4695a4b8495c4b42c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
