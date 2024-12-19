@@ -13,9 +13,4 @@ public class DashEffect : BaseEffect
     {
         _animator.SetBool("Dash", true);
     }
-
-    public void SetActiveFalse()
-    {
-        gameObject.SetActive(false);
-    }
 }

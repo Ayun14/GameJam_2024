@@ -22,6 +22,6 @@ MonoBehaviour:
   - prefab: {fileID: 6472431961587220186, guid: 03d5865da6b3746639acdd263470d2bb, type: 3}
     prefabTypeName: DashEffect
     poolCount: 5
-  - prefab: {fileID: 3537005438603931011, guid: dd7fb64108623d641bd903d883a1d32c, type: 3}
-    prefabTypeName: OnBulletDead
+  - prefab: {fileID: 1650768272743976711, guid: eb047781be4ba714eabd2f1433fd71bb, type: 3}
+    prefabTypeName: BulletDeadEffect
     poolCount: 5
