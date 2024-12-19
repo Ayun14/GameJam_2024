@@ -1,4 +1,5 @@
 // #define BULLETDEBUG
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,11 +10,14 @@ public abstract class BaseBullet : MonoBehaviour
     {
         public static readonly LayerMask playerLayer = LayerMask.GetMask("Player");
     }
+
     [Header("General")]
     [SerializeField] protected float speed = 5;
+
     [SerializeField] protected float deadForcePower = 21;
     [SerializeField] private GameObject onDeadPrefab;
     [SerializeField] private Transform onDeadTransform;
+    //[SerializeField] private MiniPool miniPool;
 
     //[Header("Rotation")]
     //[SerializeField] private float _rotationSpeed;
@@ -22,9 +26,9 @@ public abstract class BaseBullet : MonoBehaviour
     //[Header("OnHold")]
     //[SerializeField] protected AudioClip onHoldAudio;
 
-    [Header("OnRelease")]
-    [SerializeField] protected GameObject onReleaseEffect;
-    [SerializeField] protected Transform onReleaseEffectTransform;
+    //[Header("OnRelease")]
+    //[SerializeField] protected GameObject onReleaseEffect;
+    //[SerializeField] protected Transform onReleaseEffectTransform;
     //[SerializeField] protected AudioClip onReleaseAudio;
 
 
@@ -47,6 +51,16 @@ public abstract class BaseBullet : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         rigid = GetComponent<Rigidbody2D>();
         transform.up = currentDirection;
+        //miniPool.Init(prefab, 10);
+    }
+    private void OnEnable()
+    {
+        //for pool
+        allowMove = true;
+        allowRotation = true;
+        isHolded = false;
+        rigid.velocity = Vector3.zero;//?
+        //need to call this.Init(); every pool
     }
     private void Update()
     {
@@ -101,7 +115,7 @@ public abstract class BaseBullet : MonoBehaviour
     {
         //allowMove = true;
         //onReleaseAudio.Play(onReleaseAudio.SelectedAudioClip, audioSource);
-        Instantiate(onReleaseEffect, onReleaseEffectTransform.position, onReleaseEffectTransform.rotation, onReleaseEffectTransform);
+        //Instantiate(onReleaseEffect, onReleaseEffectTransform.position, onReleaseEffectTransform.rotation, onReleaseEffectTransform);
         OnDeadForce();
         OnRelease();
     }
@@ -125,6 +139,15 @@ public abstract class BaseBullet : MonoBehaviour
     protected virtual void OnHold()
     {
     }
+    public void OnHighlightEnter()
+    {
+        print("ent");
+    }
+    public void OnHighlightExit()
+    {
+        print("exit");
+    }
+
     protected virtual void OnDeadForce()
     {
         rigid.gravityScale = 1;
@@ -139,7 +162,8 @@ public abstract class BaseBullet : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        OnDead();
+        if(collision.gameObject.layer != 9)
+            OnDead();
     }
     public void Kill()
     {
