@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Hellmade.Sound
 {
@@ -424,6 +425,13 @@ namespace Hellmade.Sound
             {
                 CreateAudiosource();
             }
+
+            if (this.Type == AudioType.Music)
+                AudioSource.outputAudioMixerGroup =
+                    Resources.Load<AudioMixer>("MainAudioMixer").FindMatchingGroups("BGM")[0];
+            else if(this.Type == AudioType.Sound)
+                AudioSource.outputAudioMixerGroup =
+                    Resources.Load<AudioMixer>("MainAudioMixer").FindMatchingGroups("SFX")[0];
 
             AudioSource.Play();
             IsPlaying = true;
