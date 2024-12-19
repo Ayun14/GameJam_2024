@@ -9,7 +9,7 @@ public class BulletInstantiatorDouble : BaseBulletInstantiatorSO
         {
             dir.Normalize();
             //BaseBullet result = Instantiate(prefab, instansiateTransform.position, Quaternion.identity);
-            GameObject go = PoolManager.Instance.Pop("PurpleBall", instansiateTransform.position, Quaternion.identity);
+            GameObject go = PoolManager.Instance.Pop(prefab.name, instansiateTransform.position, Quaternion.identity);
 
             if (go.TryGetComponent(out BaseBullet bullet))
             {

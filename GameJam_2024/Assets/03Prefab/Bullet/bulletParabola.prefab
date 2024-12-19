@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c584b746bdc66c4e9c59dac8e1a0d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPoolName: Parabola
+  _bulletPoolName: bulletParabola
   speed: 10
   deadForcePower: 21
   onDeadTransform: {fileID: 6834070057217851970}

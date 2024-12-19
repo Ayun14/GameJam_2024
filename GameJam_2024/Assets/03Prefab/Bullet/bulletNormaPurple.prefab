@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 305209beb251a944ab3551ff896cd3e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPoolName: PurpleBall
+  _bulletPoolName: bulletNormaPurple
   speed: 5
   deadForcePower: 21
   onDeadTransform: {fileID: 1354466839341068167}
