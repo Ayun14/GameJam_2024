@@ -71,15 +71,16 @@ public class Player : Entity
         {
             float minDistance = hits[0].distance;
             RaycastHit2D firstHit = hits[0];
+            BaseBullet bullet = firstHit.transform.GetComponent<BaseBullet>();
             foreach (RaycastHit2D hit in hits)
             {
-                if (hit.distance < minDistance)
+                bullet = hit.transform.GetComponent<BaseBullet>();
+                if (hit.distance < minDistance && bullet.IsHolded == false)
                 {
                     minDistance = hit.distance;
-                    firstHit = hit;
+                    catchedBullet = bullet;
                 }
             }
-            catchedBullet = firstHit.transform.GetComponent<BaseBullet>();
             return true;
         }
         catchedBullet = null;
