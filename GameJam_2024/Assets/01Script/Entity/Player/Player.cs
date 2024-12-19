@@ -19,7 +19,7 @@ public class Player : Entity
     [SerializeField] private float _dashPower;
     [SerializeField] private float _catchRadius;
     [SerializeField] private LayerMask _whatIsBullet;
-    [HideInInspector] public ParticleSystem dashParticle;
+    [HideInInspector] public DashEffect dashEffect;
     [HideInInspector] public Arrow arrow;
     [HideInInspector] public BaseBullet catchedBullet;
 
@@ -34,7 +34,8 @@ public class Player : Entity
         base.AfterInitialize();
         InputCompo = GetComponent<PlayerInputCompo>();
         _mover = GetCompo<EntityMover>();
-        dashParticle = transform.Find("DashEffect").GetComponent<ParticleSystem>();
+        dashEffect = transform.Find("DashEffect").GetComponent<DashEffect>();
+        dashEffect.gameObject.SetActive(false);
 
         // Arrow
         arrow = transform.Find("Arrow").GetComponent<Arrow>();
