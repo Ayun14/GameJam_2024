@@ -241,10 +241,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   deadForcePower: 21
-  onHoldAudio: {fileID: 11400000, guid: 01ada7ac5b7a4c742938da992311096b, type: 2}
+  onDeadPrefab: {fileID: 4423770569894467205}
+  onDeadTransform: {fileID: 241794799314506263, guid: dd7fb64108623d641bd903d883a1d32c, type: 3}
+  onHoldAudio: {fileID: 0}
   onReleaseEffect: {fileID: 8859666348391566620, guid: 032873863e1c2ef49842bbef1d5d6945, type: 3}
   onReleaseEffectTransform: {fileID: 6834070057217851970}
-  onReleaseAudio: {fileID: 11400000, guid: d843536e9cfa4664eaab2384b04c1452, type: 2}
+  onReleaseAudio: {fileID: 0}
 --- !u!1 &5791919500922116284
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,7 +263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &920896985372233154
 Transform:
   m_ObjectHideFlags: 0
@@ -381,6 +383,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 8517401181378089127, guid: 922c31dee7200cc4d956dbe2a50f5b18, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: a64b7d4e78c4ccd4ea96c94803c26441, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
