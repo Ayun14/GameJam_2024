@@ -71,6 +71,9 @@ public class BaseEnemy : MonoBehaviour
     }
     private void FireBullet()
     {
+        //if enemy position is out of bounds than return;
+        if (!transform.IsPositionValid()) return;
+
         Vector3 direction = Vector3.zero;
         switch (spawnDirection)
         {
