@@ -59,7 +59,7 @@ public class ButtonController : MonoBehaviour
         Tween tween = _fadeCanvas.DOFade(1f, 1f);
         yield return tween.WaitForCompletion();
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MainScene");
     }
 
     private IEnumerator ShowSetting(bool isOpen)
