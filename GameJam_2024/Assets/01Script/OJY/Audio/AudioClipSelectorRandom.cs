@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/AudioClipSelector_Random")]
+//[CreateAssetMenu(menuName = "SO/AudioClipSelector_Random")]
 public class AudioClipSelectorRandom : BaseAudioClipSelector
 {
     public override AudioClip SelectAudioClip(IReadOnlyList<AudioClip> clips)
