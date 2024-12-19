@@ -12,6 +12,10 @@ public class ButtonController : MonoBehaviour
     [SerializeField] private CanvasGroup _settingCanvasGroup;
     [SerializeField] private RectTransform _settingRectTransform;
 
+    [SerializeField] private GameObject _bestCanvas;
+    [SerializeField] private CanvasGroup _bestCanvasGroup;
+    [SerializeField] private RectTransform _bestRectTransform;
+
     [SerializeField] private CanvasGroup _fadeCanvas;
 
     [SerializeField] private Slider _musicSlider;
@@ -71,6 +75,14 @@ public class ButtonController : MonoBehaviour
         StartCoroutine(Fade("TutorialScene"));
     }
 
+    public void OnBestButton()
+    {
+        ButtonClickSound();
+        _bestCanvas.SetActive(true);
+        _bestCanvasGroup.alpha = 1;
+        StartCoroutine(ShowBest(true));
+    }
+
     public void OnSettingButton()
     {
         ButtonClickSound();
@@ -86,10 +98,16 @@ public class ButtonController : MonoBehaviour
         Application.Quit();
     }
 
-    public void OnXButton()
+    public void OnXSettingButton()
     {
         ButtonClickSound();
         StartCoroutine(ShowSetting(false));
+    }
+
+    public void OnXBestButton()
+    {
+        ButtonClickSound();
+        StartCoroutine(ShowBest(false));
     }
 
     private IEnumerator Fade(string sceneName)
@@ -110,6 +128,18 @@ public class ButtonController : MonoBehaviour
         {
             _settingCanvasGroup.alpha = 0;
             _settingCanvas.SetActive(false);
+        }
+    }
+
+    private IEnumerator ShowBest(bool isOpen)
+    {
+        float endPosX = isOpen ? 380f : 1300f;
+        Tween tween = _bestRectTransform.DOAnchorPosX(endPosX, 0.5f);
+        yield return tween.WaitForCompletion();
+        if (!isOpen)
+        {
+            _bestCanvasGroup.alpha = 0;
+            _bestCanvas.SetActive(false);
         }
     }
 

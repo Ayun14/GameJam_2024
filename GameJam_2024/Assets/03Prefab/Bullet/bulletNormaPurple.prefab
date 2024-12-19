@@ -298,9 +298,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 305209beb251a944ab3551ff896cd3e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletPoolName: bulletNormaPurple
   speed: 5
   deadForcePower: 21
-  onDeadPrefab: {fileID: 3537005438603931011, guid: dd7fb64108623d641bd903d883a1d32c, type: 3}
   onDeadTransform: {fileID: 1354466839341068167}
   visualSprite: {fileID: 8907586530605143760}
 --- !u!58 &9017941406287923241

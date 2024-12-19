@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pairs:
   - prefab: {fileID: 7738678153098674209, guid: 11b5a96b86fd7aa4c970e75a05f11da3, type: 3}
-    prefabTypeName: PurpleBall
+    prefabTypeName: bulletNormaPurple
     poolCount: 20
   - prefab: {fileID: 4423770569894467205, guid: a98a4f5249363044d9e6947c5bb37fa2, type: 3}
-    prefabTypeName: Parabola
+    prefabTypeName: bulletParabola
     poolCount: 20
   - prefab: {fileID: 6472431961587220186, guid: 03d5865da6b3746639acdd263470d2bb, type: 3}
     prefabTypeName: DashEffect

@@ -57,7 +57,7 @@ public abstract class BaseBullet : MonoBehaviour
         allowMove = true;
         allowRotation = true;
         isHolded = false;
-        rigid.velocity = Vector3.zero;//?
+        
         //need to call this.Init(); every pool
     }
     private void Update()
@@ -174,6 +174,7 @@ public abstract class BaseBullet : MonoBehaviour
 
     private void OnDead()
     {
+        rigid.velocity = Vector3.zero;//?
         PoolManager.Instance.Pop("BulletDeadEffect", onDeadTransform.position, Quaternion.identity);
         PoolManager.Instance.Push(_bulletPoolName, gameObject);
     }
