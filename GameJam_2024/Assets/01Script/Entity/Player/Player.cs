@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Player : Entity
 {
@@ -19,7 +20,7 @@ public class Player : Entity
     [SerializeField] private float _dashPower;
     [SerializeField] private float _catchRadius;
     [SerializeField] private LayerMask _whatIsBullet;
-    [HideInInspector] public ParticleSystem dashParticle;
+    public DashEffect dashEffect;
     [HideInInspector] public Arrow arrow;
     [HideInInspector] public BaseBullet catchedBullet;
 
@@ -34,7 +35,8 @@ public class Player : Entity
         base.AfterInitialize();
         InputCompo = GetComponent<PlayerInputCompo>();
         _mover = GetCompo<EntityMover>();
-        dashParticle = transform.Find("DashEffect").GetComponent<ParticleSystem>();
+
+        ResetJumpCount();
 
         // Arrow
         arrow = transform.Find("Arrow").GetComponent<Arrow>();
@@ -70,13 +72,15 @@ public class Player : Entity
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _catchRadius, Vector3.up, 0f, _whatIsBullet);
         if (hits.Length > 0)
         {
-            float minDistance = _catchRadius;
+            float minDistance = Mathf.Infinity;
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             for (int i = 0; i < hits.Length; i++)
             {
                 BaseBullet bullet = hits[i].transform.GetComponent<BaseBullet>();
-                if (hits[i].distance < minDistance && bullet.IsHolded == false)
+                float distance = Vector2.Distance(mousePos, hits[i].point);
+                if (distance <= minDistance && bullet.IsHolded == false) //hits[i].distance
                 {
-                    minDistance = hits[i].distance;
+                    minDistance = distance;//hits[i].distance;
                     catchedBullet = bullet;
                 }
             }
@@ -86,7 +90,7 @@ public class Player : Entity
 
     public void Dash()
     {
-        _mover.KnockBack(GetMouseDirection(transform) * _dashPower, 0.7f);
+        _mover.KnockBack(GetMouseDirection(transform) * _dashPower);
     }
 
     public Vector3 GetMouseDirection(Transform trm)
@@ -97,9 +101,16 @@ public class Player : Entity
         return (mousePosition - trm.position).normalized;
     }
 
+    public void SpawnDashEffect()
+    {
+        DashEffect effect = Instantiate(dashEffect, catchedBullet.transform.position, Quaternion.identity);
+        effect.DashEffectPlay();
+    }
+
     public void ResetJumpCount()
     {
         CurrentJumpCount = jumpCount;
+        GetCompo<EntityRenderer>().Jump(jumpCountParam, CurrentJumpCount);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

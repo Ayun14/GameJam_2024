@@ -37,19 +37,18 @@ public class PlayerCatchState : PlayerAirState
         // 대쉬 하기
         if (_player.catchedBullet != null)
         {
-            // Particle
-            _player.dashParticle.transform.position = _player.catchedBullet.transform.position;
-            _player.dashParticle.Play();
-
-            // Sound
-            SoundController.Instance.PlaySFX(2);
-
             _player.transform.position = _player.catchedBullet.transform.position;
             _player.Dash();
             _player.catchedBullet.Release();
 
             _shaker.CameraShake();
             _player.ResetJumpCount();
+
+            // Particle
+            _player.SpawnDashEffect();
+
+            // Sound
+            SoundController.Instance.PlaySFX(2);
 
             _player.catchedBullet = null;
         }

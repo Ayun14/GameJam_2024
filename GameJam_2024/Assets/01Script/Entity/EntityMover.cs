@@ -21,7 +21,6 @@ public class EntityMover : MonoBehaviour, IEntityComponent, IAfterInitable
     [field: SerializeField] public bool CanManualMove { get; set; } = true;
 
     private Entity _entity;
-    private Tween _knockBackTween; // ÇöÀç ³Ë¹éÀÇ DelayedCall Tween
 
     public void Initialize(Entity entity)
     {
@@ -47,6 +46,20 @@ public class EntityMover : MonoBehaviour, IEntityComponent, IAfterInitable
         }
 
         OnMovement?.Invoke(_rbCompo.velocity);
+
+        SetManualMove();
+    }
+
+    private void SetManualMove()
+    {
+        if (CanManualMove == false)
+        {
+            Vector2 velocity = _rbCompo.velocity;
+            if (velocity.x < 0.5f)
+            {
+                CanManualMove = true;
+            }
+        }
     }
 
     public void SetMovement(float xMovement)
@@ -80,17 +93,13 @@ public class EntityMover : MonoBehaviour, IEntityComponent, IAfterInitable
 
     #region KnockBack
 
-    public void KnockBack(Vector2 force, float time)
+    public void KnockBack(Vector2 force)
     {
         _entity.OnKnockBackEvent?.Invoke(force);
-
-        _knockBackTween?.Kill();
-        _knockBackTween = null;
 
         CanManualMove = false;
         StopImmediately(true);
         AddForceToEntity(force);
-        _knockBackTween = DOVirtual.DelayedCall(time, () => CanManualMove = true);
     }
 
     #endregion
