@@ -177,7 +177,8 @@ public abstract class BaseBullet : MonoBehaviour
 
     private void OnDead()
     {
-        Instantiate(onDeadPrefab, onDeadTransform.position, Quaternion.identity, null);
+        PoolManager.Instance.Pop("OnBulletDead", onDeadTransform.position, Quaternion.identity);
+        //Instantiate(onDeadPrefab, onDeadTransform.position, Quaternion.identity, null);
         Destroy(gameObject);
     }
 

@@ -10,12 +10,12 @@ public class MeterController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _playTimeText;
 
     private float _meter = 0;
-    private float _maxMeter =0;
+    private float _maxMeter = 0;
     public float Meter => _meter;
 
     private float _sec = 0;
     private int _min = 0;
-    private float _allTime =0;
+    private float _allTime = 0;
 
     private bool isPlaying = true;
 
@@ -40,7 +40,7 @@ public class MeterController : MonoBehaviour
         _meter = _playerTrm.position.y / _meterY;
         _text.text = $"{(int)_meter} M";
 
-        if(_meter > _maxMeter)
+        if (_meter > _maxMeter)
         {
             _maxMeter = _meter;
             SaveController.Instance.SaveHeight(_maxMeter);
@@ -65,7 +65,7 @@ public class MeterController : MonoBehaviour
 
         isPlaying = false;
 
-        if(PlayerPrefs.GetFloat("MaxTime") < _allTime)
+        if (PlayerPrefs.GetFloat("MaxTime") < _allTime)
         {
             SaveController.Instance.SaveMaxTime(_allTime);
             SaveController.Instance.SaveTime(_min, _sec);
