@@ -6,6 +6,7 @@ public abstract class BaseBullet : MonoBehaviour
     private static class Cache
     {
         public static readonly LayerMask playerLayer = LayerMask.GetMask("Player");
+        public static readonly LayerMask nothing = 0;
     }
     [SerializeField] private string _bulletPoolName;
 
@@ -49,6 +50,7 @@ public abstract class BaseBullet : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         rigid = GetComponent<Rigidbody2D>();
         transform.up = currentDirection;
+
         //miniPool.Init(prefab, 10);
     }
     private void OnEnable()
@@ -156,7 +158,7 @@ public abstract class BaseBullet : MonoBehaviour
 
     protected virtual void OnDeadForce()
     {
-        rigid.gravityScale = 1;
+        //rigid.gravityScale = 1;
         Debug.DrawRay(transform.position, currentDirection * deadForcePower, Color.red, 5);
         rigid.AddForce(currentDirection * deadForcePower, ForceMode2D.Impulse);
     }
@@ -179,6 +181,9 @@ public abstract class BaseBullet : MonoBehaviour
     private void OnDead()
     {
         rigid.velocity = Vector3.zero;//?
+        if (TryGetComponent(out Collider2D currentCollider))
+            currentCollider.excludeLayers = Cache.nothing;
+        else Debug.LogWarning("bullet has no collider");
         OnHighlightExit();
         PoolManager.Instance.Pop("BulletDeadEffect", onDeadTransform.position, Quaternion.identity);
         PoolManager.Instance.Push(_bulletPoolName, gameObject);
