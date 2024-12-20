@@ -22,6 +22,7 @@ public class MeterController : MonoBehaviour
     private void Start()
     {
         _meter = 0;
+        SoundController.Instance.PlayBGM(1);
     }
 
     private void Update()
