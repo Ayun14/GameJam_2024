@@ -6,7 +6,7 @@ public class Tutorial_RespawnBullet : MonoBehaviour
     [SerializeField] private List<Transform> bulletSpawnTransform;
     private List<BaseBullet> spawnedBullets = new();
     [SerializeField] private BaseBullet bulletToSpawn;
-    [SerializeField] private GameObject spawnParticle;
+
     public void OnEnter()
     {
         for (int i = spawnedBullets.Count - 1; i >= 0; i--)
