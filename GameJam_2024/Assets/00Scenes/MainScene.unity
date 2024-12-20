@@ -133,7 +133,7 @@ PrefabInstance:
     - target: {fileID: 3700840910098941298, guid: 2bc18b3c06fb19140a749db519dc5045, type: 3}
       propertyPath: instansiaor
       value: 
-      objectReference: {fileID: 11400000, guid: 2df521cfaf42bae4599e3b9a2841eab8, type: 2}
+      objectReference: {fileID: 11400000, guid: 08bce091ca7de5a428e1c6f43646067a, type: 2}
     - target: {fileID: 3700840910098941298, guid: 2bc18b3c06fb19140a749db519dc5045, type: 3}
       propertyPath: bulletPrefab
       value: 
@@ -111706,14 +111706,14 @@ PrefabInstance:
     - target: {fileID: 3700840910098941298, guid: 2bc18b3c06fb19140a749db519dc5045, type: 3}
       propertyPath: instansiaor
       value: 
-      objectReference: {fileID: 11400000, guid: 2df521cfaf42bae4599e3b9a2841eab8, type: 2}
+      objectReference: {fileID: 11400000, guid: 08bce091ca7de5a428e1c6f43646067a, type: 2}
     - target: {fileID: 3700840910098941298, guid: 2bc18b3c06fb19140a749db519dc5045, type: 3}
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 4316576685705231504, guid: 11b5a96b86fd7aa4c970e75a05f11da3, type: 3}
     - target: {fileID: 3700840910098941298, guid: 2bc18b3c06fb19140a749db519dc5045, type: 3}
       propertyPath: spawnDirection
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3978665135252823945, guid: 2bc18b3c06fb19140a749db519dc5045, type: 3}
       propertyPath: m_LocalPosition.x
