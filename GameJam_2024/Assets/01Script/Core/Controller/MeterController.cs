@@ -66,7 +66,7 @@ public class MeterController : MonoBehaviour
 
         isPlaying = false;
 
-        if (PlayerPrefs.GetFloat("MaxTime") < _allTime)
+        if (PlayerPrefs.GetFloat("MaxTime") > _allTime)
         {
             SaveController.Instance.SaveMaxTime(_allTime);
             SaveController.Instance.SaveTime(_min, _sec);
