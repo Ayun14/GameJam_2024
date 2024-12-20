@@ -179,6 +179,7 @@ public abstract class BaseBullet : MonoBehaviour
     private void OnDead()
     {
         rigid.velocity = Vector3.zero;//?
+        OnHighlightExit();
         PoolManager.Instance.Pop("BulletDeadEffect", onDeadTransform.position, Quaternion.identity);
         PoolManager.Instance.Push(_bulletPoolName, gameObject);
     }
