@@ -54,7 +54,7 @@ public class EntityMover : MonoBehaviour, IEntityComponent, IAfterInitable
         if (CanManualMove == false)
         {
             Vector2 velocity = _rbCompo.velocity;
-            if (velocity.x < 0.5f)
+            if (Mathf.Abs(velocity.x) < 0.5f)
             {
                 CanManualMove = true;
             }
