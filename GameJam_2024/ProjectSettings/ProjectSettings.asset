@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: Jump to Catch
+  companyName: Gimadollph
+  productName: JumpToCatch
   defaultCursor: {fileID: 2800000, guid: 5d9c17cb7253cb54e835fbb6f38f97d7, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.16696148, g: 0.15797438, b: 0.23584908, a: 1}
@@ -161,7 +161,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.DefaultCompany.Jump-to-Catch
+    Standalone: com.Gimadollph.JumpToCatch
   buildNumber:
     Standalone: 0
     VisionOS: 0
