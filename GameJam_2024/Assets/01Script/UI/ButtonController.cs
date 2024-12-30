@@ -8,34 +8,62 @@ using UnityEngine.UI;
 
 public class ButtonController : MonoBehaviour
 {
+    [Header("Setting Canvas")]
     [SerializeField] private GameObject _settingCanvas;
     [SerializeField] private CanvasGroup _settingCanvasGroup;
     [SerializeField] private RectTransform _settingRectTransform;
-
+    [Header("Best Canvas")]
     [SerializeField] private GameObject _bestCanvas;
     [SerializeField] private CanvasGroup _bestCanvasGroup;
     [SerializeField] private RectTransform _bestRectTransform;
 
+    [Header("Fade Canvas")]
     [SerializeField] private CanvasGroup _fadeCanvas;
 
+    [Header("Setting Value")]
     [SerializeField] private Slider _musicSlider;
     [SerializeField] private Slider _sfxSlider;
-
     [SerializeField] private AudioMixer _audioMixer;
 
+    [Header("Best Value")]
     [SerializeField] private TextMeshProUGUI _bestHeight;
     [SerializeField] private TextMeshProUGUI _bestTime;
 
+    [Header("MainGame Value")]
+    [SerializeField] private Player _player;
+    private Vector2 _playerStartPos;
+
+    private bool _isSettingOpen = false;
+    private bool _isBestOpen = false;
+
     private void Start()
     {
-        SoundController.Instance.PlayBGM(0);
-
         DataLoad();
+
+        if(_player != null)
+            _playerStartPos = _player.transform.position;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (_isSettingOpen)
+                OnXSettingButton();
+            else if (_isBestOpen)
+                OnXBestButton();
+            else if(SceneManager.GetActiveScene().name == "MainScene")
+                OnSettingButton();
+        }
     }
 
     private void DataLoad()
     {
-        LoadData();
+        if (SceneManager.GetActiveScene().name == "TitleScene")
+        {
+            SoundController.Instance.PlayBGM(0);
+            LoadData();
+        }
 
         if (!PlayerPrefs.HasKey("BGM"))
             SaveController.Instance.SaveBGM(_musicSlider.value);
@@ -77,6 +105,8 @@ public class ButtonController : MonoBehaviour
 
     public void OnBestButton()
     {
+        _isBestOpen = true;
+
         ButtonClickSound();
         _bestCanvas.SetActive(true);
         _bestCanvasGroup.alpha = 1;
@@ -85,6 +115,10 @@ public class ButtonController : MonoBehaviour
 
     public void OnSettingButton()
     {
+        _isSettingOpen = true;
+        //if (_player != null)
+        //    _player.InputCompo.enabled = false;
+
         ButtonClickSound();
         _settingCanvas.SetActive(true);
         _settingCanvasGroup.alpha = 1;
@@ -100,12 +134,18 @@ public class ButtonController : MonoBehaviour
 
     public void OnXSettingButton()
     {
+        _isSettingOpen = false;
+        //if (_player != null)
+        //    _player.InputCompo.enabled = true;
+
         ButtonClickSound();
         StartCoroutine(ShowSetting(false));
     }
 
     public void OnXBestButton()
     {
+        _isBestOpen = false;
+
         ButtonClickSound();
         StartCoroutine(ShowBest(false));
     }
@@ -121,7 +161,8 @@ public class ButtonController : MonoBehaviour
 
     private IEnumerator ShowSetting(bool isOpen)
     {
-        float endPosX = isOpen ? 380f : 1300f;
+        float minPosX = SceneManager.GetActiveScene().name == "MainScene" ? 0f : 380f;
+        float endPosX = isOpen ? minPosX : 1300f;
         Tween tween = _settingRectTransform.DOAnchorPosX(endPosX, 0.5f);
         yield return tween.WaitForCompletion();
         if (!isOpen)
@@ -160,5 +201,15 @@ public class ButtonController : MonoBehaviour
     private void ButtonClickSound()
     {
         SoundController.Instance.PlaySFX(0);
+    }
+
+    public void OnReStartButton()
+    {
+        _player.transform.position = _playerStartPos;
+    }
+
+    public void OnMenuButton()
+    {
+        SceneManager.LoadScene("TitleScene");
     }
 }
