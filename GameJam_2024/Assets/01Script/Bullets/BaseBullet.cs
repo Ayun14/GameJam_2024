@@ -76,7 +76,8 @@ public abstract class BaseBullet : MonoBehaviour
         //    transform.position.x > max.x || transform.position.y > max.y)
         if (!transform.IsPositionValid())
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            PoolManager.Instance.Push(gameObject.name, gameObject);
         }
 #if BULLETDEBUG
 

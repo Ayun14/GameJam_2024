@@ -3,16 +3,15 @@ using UnityEngine;
 
 public class MeterController : MonoBehaviour
 {
-    [Header("Meter")]
+
+    [Header("Persent")]
+    [SerializeField] private float _endY = 917f;
     [SerializeField] private Transform _playerTrm;
-    [SerializeField] private float _meterY; // 얼마의 y값이 1M가 될 것 인지.
-    [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private TextMeshProUGUI _persentText;
+    private int _maxPersent = 0;
+
+    [Header("Time")]
     [SerializeField] private TextMeshProUGUI _playTimeText;
-
-    private float _meter = 0;
-    private float _maxMeter = 0;
-    public float Meter => _meter;
-
     private float _sec = 0;
     private int _min = 0;
     private float _allTime = 0;
@@ -21,7 +20,6 @@ public class MeterController : MonoBehaviour
 
     private void Start()
     {
-        _meter = 0;
         SoundController.Instance.PlayBGM(1);
     }
 
@@ -33,18 +31,19 @@ public class MeterController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MeterCalculation();
+        PersentCalculation();
     }
 
-    private void MeterCalculation()
+    private void PersentCalculation()
     {
-        _meter = _playerTrm.position.y / _meterY;
-        _text.text = $"{(int)_meter} M";
+        float persent = (_playerTrm.position.y / _endY) * 100f;
+        int persentClamp = Mathf.Clamp((int)persent, 0, 100);
+        _persentText.text = $"{persentClamp} %";
 
-        if (_meter > _maxMeter)
+        if (persentClamp > _maxPersent)
         {
-            _maxMeter = _meter;
-            SaveController.Instance.SaveHeight(_maxMeter);
+            _maxPersent = persentClamp;
+            SaveController.Instance.SaveHeight(_maxPersent);
         }
     }
 
