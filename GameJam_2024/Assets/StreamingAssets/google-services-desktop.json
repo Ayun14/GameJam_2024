@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "509282472805",
+    "project_id": "jumptocatch-ff698",
+    "storage_bucket": "jumptocatch-ff698.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:509282472805:android:abdf0e4e0077a7c38f878c",
+        "android_client_info": {
+          "package_name": "com.Gimadollph.JumpToCatch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcUZbVQNIZl97fq7CJhHZwOGdzid7O-gs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

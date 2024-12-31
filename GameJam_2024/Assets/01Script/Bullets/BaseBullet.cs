@@ -77,7 +77,7 @@ public abstract class BaseBullet : MonoBehaviour
         if (!transform.IsPositionValid())
         {
             //Destroy(gameObject);
-            PoolManager.Instance.Push(gameObject.name, gameObject);
+            PoolManager.Instance.Push(_bulletPoolName, gameObject);
         }
 #if BULLETDEBUG
 
@@ -189,5 +189,4 @@ public abstract class BaseBullet : MonoBehaviour
         PoolManager.Instance.Pop("BulletDeadEffect", onDeadTransform.position, Quaternion.identity);
         PoolManager.Instance.Push(_bulletPoolName, gameObject);
     }
-
 }
