@@ -39,6 +39,7 @@ public abstract class BaseBullet : MonoBehaviour
     protected bool allowMove = true;
     protected bool allowRotation = true;
     protected bool isHolded;
+    protected bool isDead = false;
     public bool IsHolded => isHolded;
     protected Vector3 currentDirection;
 
@@ -50,17 +51,16 @@ public abstract class BaseBullet : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         rigid = GetComponent<Rigidbody2D>();
         transform.up = currentDirection;
-
         //miniPool.Init(prefab, 10);
     }
     private void OnEnable()
     {
         //for pool
+        isDead = false;
         allowMove = true;
         allowRotation = true;
         isHolded = false;
         rigid.velocity = Vector3.zero;//?
-
         //need to call this.Init(); every pool
     }
     private void Update()
@@ -181,6 +181,8 @@ public abstract class BaseBullet : MonoBehaviour
 
     private void OnDead()
     {
+        if (isDead) return;
+        isDead = true;
         rigid.velocity = Vector3.zero;//?
         if (TryGetComponent(out Collider2D currentCollider))
             currentCollider.excludeLayers = Cache.nothing;
