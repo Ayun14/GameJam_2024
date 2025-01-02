@@ -90,8 +90,6 @@ public class BaseEnemy : MonoBehaviour
                 direction = firePos.up;
                 break;
         };
-        if (gameObject.name == "Slime (24)")
-            Debug.Log("SHot");
         instansiaor.InstantiateBullet(firePos, direction, bulletPrefab, speed);
     }
     private void OnDrawGizmosSelected()
