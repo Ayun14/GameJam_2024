@@ -12,10 +12,11 @@ public class ButtonController : MonoBehaviour
     [SerializeField] private GameObject _settingCanvas;
     [SerializeField] private CanvasGroup _settingCanvasGroup;
     [SerializeField] private RectTransform _settingRectTransform;
-    [Header("Best Canvas")]
-    [SerializeField] private GameObject _bestCanvas;
-    [SerializeField] private CanvasGroup _bestCanvasGroup;
-    [SerializeField] private RectTransform _bestRectTransform;
+
+    [Header("RankingBoard Canvas")]
+    [SerializeField] private GameObject _rankingCanvas;
+    [SerializeField] private CanvasGroup _rankingCanvasGroup;
+    [SerializeField] private RectTransform _rankingRectTransform;
 
     [Header("Fade Canvas")]
     [SerializeField] private CanvasGroup _fadeCanvas;
@@ -51,7 +52,7 @@ public class ButtonController : MonoBehaviour
             if (_isSettingOpen)
                 OnXSettingButton();
             else if (_isBestOpen)
-                OnXBestButton();
+                OnXRankingButton();
             else if(SceneManager.GetActiveScene().name == "MainScene")
                 OnSettingButton();
         }
@@ -84,10 +85,10 @@ public class ButtonController : MonoBehaviour
 
     public void LoadData()
     {
-        if (PlayerPrefs.HasKey("Height"))
-            _bestHeight.text = PlayerPrefs.GetInt("Height").ToString() + " M";
-        if (PlayerPrefs.HasKey("Time"))
-            _bestTime.text = PlayerPrefs.GetString("Time");
+        //if (PlayerPrefs.HasKey("Height"))
+        //   _bestHeight.text = PlayerPrefs.GetInt("Height").ToString() + " M";
+        //if (PlayerPrefs.HasKey("Time"))
+        //    _bestTime.text = PlayerPrefs.GetString("Time");
     }
 
     public void OnStartButton()
@@ -103,14 +104,14 @@ public class ButtonController : MonoBehaviour
         StartCoroutine(Fade("TutorialScene"));
     }
 
-    public void OnBestButton()
+    public void OnRankingButton()
     {
         _isBestOpen = true;
 
         ButtonClickSound();
-        _bestCanvas.SetActive(true);
-        _bestCanvasGroup.alpha = 1;
-        StartCoroutine(ShowBest(true));
+        _rankingCanvas.SetActive(true);
+        _rankingCanvasGroup.alpha = 1;
+        StartCoroutine(ShowRanking(true));
     }
 
     public void OnSettingButton()
@@ -142,12 +143,12 @@ public class ButtonController : MonoBehaviour
         StartCoroutine(ShowSetting(false));
     }
 
-    public void OnXBestButton()
+    public void OnXRankingButton()
     {
         _isBestOpen = false;
 
         ButtonClickSound();
-        StartCoroutine(ShowBest(false));
+        StartCoroutine(ShowRanking(false));
     }
 
     private IEnumerator Fade(string sceneName)
@@ -172,15 +173,15 @@ public class ButtonController : MonoBehaviour
         }
     }
 
-    private IEnumerator ShowBest(bool isOpen)
+    private IEnumerator ShowRanking(bool isOpen)
     {
         float endPosX = isOpen ? 380f : 1300f;
-        Tween tween = _bestRectTransform.DOAnchorPosX(endPosX, 0.5f);
+        Tween tween = _rankingRectTransform.DOAnchorPosX(endPosX, 0.5f);
         yield return tween.WaitForCompletion();
         if (!isOpen)
         {
-            _bestCanvasGroup.alpha = 0;
-            _bestCanvas.SetActive(false);
+            _rankingCanvasGroup.alpha = 0;
+            _rankingCanvas.SetActive(false);
         }
     }
 
