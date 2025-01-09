@@ -8,11 +8,11 @@ public class UserData
     public int maxPersent;
     public string clearTime;
 
-    public UserData(string userName, int maxPersent, string cleraTime)
+    public UserData(string userName, int maxPersent, string clearTime)
     {
         this.userName = userName;
         this.maxPersent = maxPersent;
-        this.clearTime = cleraTime;
+        this.clearTime = clearTime;
     }
 
     public void DebugData()

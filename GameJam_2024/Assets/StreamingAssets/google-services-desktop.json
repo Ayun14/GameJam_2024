@@ -2,7 +2,8 @@
   "project_info": {
     "project_number": "509282472805",
     "project_id": "jumptocatch-ff698",
-    "storage_bucket": "jumptocatch-ff698.firebasestorage.app"
+    "storage_bucket": "jumptocatch-ff698.firebasestorage.app",
+    "firebase_url": "https://jumptocatch-ff698-default-rtdb.firebaseio.com/"
   },
   "client": [
     {
