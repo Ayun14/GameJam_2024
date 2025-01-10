@@ -5,18 +5,18 @@ using UnityEngine;
 public class UserData
 {
     public string userName;
-    public int maxPersent;
+    public int maxPercent;
     public string clearTime;
 
-    public UserData(string userName, int maxPersent, string clearTime)
+    public UserData(string userName, int maxPercent, string clearTime)
     {
         this.userName = userName;
-        this.maxPersent = maxPersent;
+        this.maxPercent = maxPercent;
         this.clearTime = clearTime;
     }
 
     public void DebugData()
     {
-        Debug.Log($"Name : {userName}, Score : {maxPersent}%, clearTime : {clearTime}");
+        Debug.Log($"Name : {userName}, Score : {maxPercent}%, clearTime : {clearTime}");
     }
 }

@@ -25,3 +25,6 @@ MonoBehaviour:
   - prefab: {fileID: 1650768272743976711, guid: eb047781be4ba714eabd2f1433fd71bb, type: 3}
     prefabTypeName: BulletDeadEffect
     poolCount: 5
+  - prefab: {fileID: 8144171007064251806, guid: 95fe0695b36d5d74681761bee1755546, type: 3}
+    prefabTypeName: RankingBlock
+    poolCount: 20

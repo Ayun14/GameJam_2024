@@ -26,10 +26,6 @@ public class ButtonController : MonoBehaviour
     [SerializeField] private Slider _sfxSlider;
     [SerializeField] private AudioMixer _audioMixer;
 
-    [Header("Best Value")]
-    [SerializeField] private TextMeshProUGUI _bestHeight;
-    [SerializeField] private TextMeshProUGUI _bestTime;
-
     [Header("MainGame Value")]
     [SerializeField] private Player _player;
     private Vector2 _playerStartPos;
@@ -63,7 +59,6 @@ public class ButtonController : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "TitleScene")
         {
             SoundController.Instance.PlayBGM(0);
-            LoadData();
         }
 
         if (!PlayerPrefs.HasKey("BGM"))
@@ -81,14 +76,6 @@ public class ButtonController : MonoBehaviour
             _sfxSlider.value = PlayerPrefs.GetFloat("SFX");
             _audioMixer.SetFloat("SFX", Mathf.Log10(_sfxSlider.value) * 20);
         }
-    }
-
-    public void LoadData()
-    {
-        //if (PlayerPrefs.HasKey("Height"))
-        //   _bestHeight.text = PlayerPrefs.GetInt("Height").ToString() + " M";
-        //if (PlayerPrefs.HasKey("Time"))
-        //    _bestTime.text = PlayerPrefs.GetString("Time");
     }
 
     public void OnStartButton()

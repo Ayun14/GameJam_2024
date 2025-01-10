@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -108.875, y: 0}
-  m_SizeDelta: {x: 194.25, y: 50}
+  m_AnchoredPosition: {x: -103.31082, y: 0}
+  m_SizeDelta: {x: 171.5483, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2245330688196923119
 CanvasRenderer:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: name
+  m_text: NAME
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e35222f650693e14f884fd1708ace342, type: 2}
   m_sharedMaterial: {fileID: -2923455280131258725, guid: e35222f650693e14f884fd1708ace342, type: 2}
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 18.392822, y: 0, z: 8.880859, w: 0}
+  m_margin: {x: 0.58755493, y: 0, z: -0.021781921, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 1798316280959507430}
   - component: {fileID: 4219318168053983387}
   m_Layer: 5
-  m_Name: Text_BestPersent
+  m_Name: Text_BestPercent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,8 +302,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 34.6563, y: 0}
-  m_SizeDelta: {x: 92.8127, y: 50}
+  m_AnchoredPosition: {x: 31.2844, y: 0}
+  m_SizeDelta: {x: 82.0226, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1798316280959507430
 CanvasRenderer:
@@ -360,8 +360,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -467,7 +467,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00:00:00
+  m_text: 00h 00m 00s
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e35222f650693e14f884fd1708ace342, type: 2}
   m_sharedMaterial: {fileID: -2923455280131258725, guid: e35222f650693e14f884fd1708ace342, type: 2}
@@ -547,6 +547,7 @@ GameObject:
   - component: {fileID: 5268269059760468578}
   - component: {fileID: 9127829860814624707}
   - component: {fileID: 327054992964807449}
+  - component: {fileID: 7144884346969983520}
   m_Layer: 5
   m_Name: UserRankingImage
   m_TagString: Untagged
@@ -615,3 +616,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7144884346969983520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8144171007064251806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5ca0b457b8a18f46970c8c6397adbda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
