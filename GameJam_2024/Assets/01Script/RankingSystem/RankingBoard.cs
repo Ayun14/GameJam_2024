@@ -18,9 +18,7 @@ public class RankingBoard : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _userClearTimeText;
 
     private DatabaseReference _dbRef;
-
     private List<UserData> _userDataList = new();
-    private KeyValuePair<int, UserData> _currentUserData;
 
     private void Awake()
     {
@@ -47,18 +45,11 @@ public class RankingBoard : MonoBehaviour
 
     private void SetRankingBoard()
     {
-        Debug.Log("SetRankingBoard");
-
+        // 기존 데이터 블록 삭제
         _userDataList.Clear();
-
-        while (_rankingBlockSpawnTrm.childCount > 0)
-        {
-            Transform child = _rankingBlockSpawnTrm.GetChild(0);
-            if (child.TryGetComponent(out RankingBlock block))
-            {
-                PoolManager.Instance.Push("RankingBlock", child.gameObject);
-            }
-        }
+        RankingBlock[] blockArr = _rankingBlockSpawnTrm.GetComponentsInChildren<RankingBlock>();
+        for (int i = 0; i < blockArr.Length; ++i)
+            PoolManager.Instance.Push("RankingBlock", blockArr[i].gameObject);
 
         if (_dbRef != null)
         {
@@ -74,18 +65,29 @@ public class RankingBoard : MonoBehaviour
                     {
                         string userName = userSnapshot.Key;
                         UserData userData = ParseUserData(userSnapshot);
+
+                        if (userData.clearTime == "00h 00m 00s")
+                            userData.clearTime = "-";
                         _userDataList.Add(userData);
                     }
 
                     _userDataList.Sort((a, b) =>
                     {
                         int percentComparison = b.maxPercent.CompareTo(a.maxPercent);
-                        if (percentComparison == 0)
+                        if (percentComparison != 0)
                         {
-                            // 만약 퍼센트가 같다면 클리어타임으로 비교
-                            return a.clearTime.CompareTo(b.clearTime);
+                            return percentComparison;
                         }
-                        return percentComparison;
+
+                        // clearTime이 "-"인지 여부로 우선 비교
+                        bool aIsDash = a.clearTime == "-";
+                        bool bIsDash = b.clearTime == "-";
+
+                        if (aIsDash && !bIsDash) return 1; // b가 우위
+                        else if (!aIsDash && bIsDash) return -1; // a가 우위
+
+                        // 만약 퍼센트가 같다면 클리어타임으로 비교
+                        return a.clearTime.CompareTo(b.clearTime);
                     });
 
                     // Update UI -> main thread
@@ -135,7 +137,7 @@ public class RankingBoard : MonoBehaviour
         GameObject go = PoolManager.Instance.Pop("RankingBlock", _rankingBlockSpawnTrm);
         if (go.TryGetComponent(out RankingBlock block))
         {
-            block.SetBlockText(rank.ToString(), userData.userName, 
+            block.SetBlockText(rank.ToString(), userData.userName,
                 userData.maxPercent.ToString(), userData.clearTime);
         }
     }

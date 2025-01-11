@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Firebase;
 using Firebase.Auth;
 using Firebase.Database;
@@ -24,11 +25,13 @@ public class UserAccount : MonoBehaviour
     [SerializeField] private TMP_InputField _passwordRegisterField;
     [SerializeField] private TMP_InputField _passwordChkRegisterField;
     [SerializeField] private TMP_Text _warningRegisterText;
+    [SerializeField] private RectTransform _registerTrm;
 
     [Header("Login")]
     [SerializeField] private TMP_InputField _emailLoginField;
     [SerializeField] private TMP_InputField _passwordLoginField;
     [SerializeField] private TMP_Text _warningLoginText;
+    [SerializeField] private RectTransform _loginTrm;
 
     private void Awake()
     {
@@ -47,6 +50,8 @@ public class UserAccount : MonoBehaviour
                 // Firebase Unity SDK is not safe to use here.
             }
         });
+
+        SoundController.Instance.PlayBGM(0);
     }
 
     public void UpdateUser(string name, int maxPersent, string clearTime)
@@ -173,6 +178,7 @@ public class UserAccount : MonoBehaviour
 
     public void OnRegister()
     {
+        SoundController.Instance.PlaySFX(0);
         StartCoroutine(Register(_emailRegisterField.text,
             _userNameRegisterField.text, _passwordRegisterField.text));
     }
@@ -234,9 +240,9 @@ public class UserAccount : MonoBehaviour
         }
     }
 
-
     public void OnLogin()
     {
+        SoundController.Instance.PlaySFX(0);
         StartCoroutine(Login(_emailLoginField.text, _passwordLoginField.text));
     }
 
@@ -330,23 +336,39 @@ public class UserAccount : MonoBehaviour
         }
     }
 
-    #region Main Buttons
+    #region UI
 
     public void LoginPannelOn()
     {
+        SoundController.Instance.PlaySFX(0);
         _loginPannel.SetActive(true);
+        StartCoroutine(PannelMove(_loginTrm, true));
     }
     public void LoginPannelOff()
     {
-        _loginPannel.SetActive(false);
+        SoundController.Instance.PlaySFX(0);
+        StartCoroutine(PannelMove(_loginTrm, false));
     }
     public void RegisterPannelOn()
     {
+        SoundController.Instance.PlaySFX(0);
         _registerPannel.SetActive(true);
+        StartCoroutine(PannelMove(_registerTrm, true));
     }
     public void RegisterPannelOff()
     {
-        _registerPannel.SetActive(false);
+        SoundController.Instance.PlaySFX(0);
+        StartCoroutine(PannelMove(_registerTrm, false));
+    }
+
+    private IEnumerator PannelMove(RectTransform rectTrm, bool isOpen)
+    {
+        float endPosY = isOpen ? 0f : 1300f;
+        Tween tween = rectTrm.DOAnchorPosY(endPosY, 0.5f);
+        yield return tween.WaitForCompletion();
+
+        if (!isOpen)
+            rectTrm.gameObject.SetActive(false);
     }
 
     #endregion
