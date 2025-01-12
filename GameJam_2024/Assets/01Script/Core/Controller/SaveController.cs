@@ -57,44 +57,55 @@ public class SaveController : MonoSingleton<SaveController>
         }
     }
 
-    public void SaveTime(int hour, int min, float sec)
+    public void SaveTime(int hour, int min, int sec)
     {
-        string formattedTime = $"{hour:D2}h {min:D2}m {Mathf.FloorToInt(sec):D2}s";
+        string formattedTime = $"{hour:D2}h {min:D2}m {sec:D2}s";
         if (_dbRef != null)
         {
             _dbRef.Child("UserData").Child(UserManager.Instance.UserName).Child("clearTime").GetValueAsync().ContinueWith(task =>
             {
                 if (task.IsCompleted)
                 {
-                    string currentTime = "00h 00m 00s";
+                    string currentTime = "-";
                     if (task.Result.Exists)
                     {
                         currentTime = task.Result.Value.ToString();
                     }
 
                     // 현재 시간과 새 시간을 비교
-                    int currentSeconds = ConvertTimeToSeconds(currentTime);
-                    int newSeconds = ConvertTimeToSeconds(formattedTime);
 
-                    if (currentSeconds == 0 || newSeconds < currentSeconds)
+                    // 기본값이 아닌경우 비교
+                    if (currentTime != "-")
                     {
-                        // 시간이 더 짧을 경우 새로운 시간 저장
-                        _dbRef.Child("UserData").Child(UserManager.Instance.UserName).Child("clearTime").SetValueAsync(formattedTime)
-                            .ContinueWith(saveTask =>
-                            {
-                                if (saveTask.IsCompleted)
-                                {
-                                    Debug.Log($"ClearTime saved for {UserManager.Instance.UserName}: {formattedTime}");
-                                }
-                                else
-                                {
-                                    Debug.LogError("Failed to save ClearTime.");
-                                }
-                            });
+                        int currentSeconds = ConvertTimeToSeconds(currentTime);
+                        int newSeconds = ConvertTimeToSeconds(formattedTime);
+
+                        if (currentSeconds == 0 || newSeconds < currentSeconds)
+                        {
+                            SaveNewTime(formattedTime);
+                        }
                     }
+                    else
+                        SaveNewTime(formattedTime);
                 }
             });
         }
+    }
+
+    private void SaveNewTime(string time)
+    {
+        _dbRef.Child("UserData").Child(UserManager.Instance.UserName).Child("clearTime").SetValueAsync(time)
+            .ContinueWith(saveTask =>
+            {
+                if (saveTask.IsCompleted)
+                {
+                    Debug.Log($"ClearTime saved for {UserManager.Instance.UserName}: {time}");
+                }
+                else
+                {
+                    Debug.LogError("Failed to save ClearTime.");
+                }
+            });
     }
 
     // 시간을 초 단위로 변환하는 헬퍼 함수

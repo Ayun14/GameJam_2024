@@ -54,15 +54,15 @@ public class UserAccount : MonoBehaviour
         SoundController.Instance.PlayBGM(0);
     }
 
-    public void UpdateUser(string name, int maxPersent, string clearTime)
+    private void Update()
     {
-        // 데이터 변환
-        UserData user = new(name, maxPersent, clearTime);
-        string json = JsonUtility.ToJson(user);
-
-        // 레퍼런스 선언 및 데이터 저장
-        DatabaseReference reference = _dbRef.Child(userType);
-        reference.Child(name).SetRawJsonValueAsync(json);
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (_loginPannel.activeSelf == true)
+                OnLogin();
+            else if (_registerPannel.activeSelf == true)
+                OnRegister();
+        }
     }
 
     #region Register
@@ -166,7 +166,8 @@ public class UserAccount : MonoBehaviour
                         _warningRegisterText.text = string.Empty;
                         StartCoroutine(SaveUserName());
                         StartCoroutine(SaveUserPassword());
-                        SaveUserData(userName, 0, "00h 00m 00s"); // 초기화값을 처음에 저장
+                        StartCoroutine(SaveUserEmail());
+                        SaveUserData(userName, 0, "-"); // 초기화값을 처음에 저장
 
                         // 회원가입 완료시 패널 off
                         RegisterPannelOff();
@@ -268,6 +269,22 @@ public class UserAccount : MonoBehaviour
     {
         var DBTask = _dbRef.Child("users").Child(_user.UserId)
             .Child("Password").SetValueAsync(_passwordRegisterField.text);
+        yield return new WaitUntil(() => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning($"");
+        }
+        else
+        {
+            Debug.Log("Password Save Completed");
+        }
+    }
+
+    private IEnumerator SaveUserEmail()
+    {
+        var DBTask = _dbRef.Child("users").Child(_user.UserId)
+            .Child("Email").SetValueAsync(_emailRegisterField.text);
         yield return new WaitUntil(() => DBTask.IsCompleted);
 
         if (DBTask.Exception != null)

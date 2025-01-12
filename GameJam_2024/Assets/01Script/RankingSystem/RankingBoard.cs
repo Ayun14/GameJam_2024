@@ -38,8 +38,9 @@ public class RankingBoard : MonoBehaviour
         });
     }
 
-    private void Start()
+    private void OnEnable()
     {
+        Debug.Log("OnEnable RankingBoard");
         SetRankingBoard();
     }
 
@@ -65,9 +66,6 @@ public class RankingBoard : MonoBehaviour
                     {
                         string userName = userSnapshot.Key;
                         UserData userData = ParseUserData(userSnapshot);
-
-                        if (userData.clearTime == "00h 00m 00s")
-                            userData.clearTime = "-";
                         _userDataList.Add(userData);
                     }
 

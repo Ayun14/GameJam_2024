@@ -62,15 +62,15 @@ public class MeterController : MonoBehaviour
                 _min = 0;
             }
         }
-        _playTimeText.text = $"{_hour.ToString("D2")}h {_min.ToString("D2")}m {((int)_sec).ToString("D2")}s";
+        _playTimeText.text = $"{_hour.ToString("D2")}h {_min.ToString("D2")}m {Mathf.FloorToInt(_sec):D2}s";
     }
 
     // 클리어 타임 저장할 때 사용
     public void SaveTime()
     {
         isPlaying = false;
-        _endingTimeText.text = $"The time it took to clear the stage is {_hour}h {_min}m {(int)_sec}s!";
-        SaveController.Instance.SaveTime(_hour, _min, _sec);
+        _endingTimeText.text = $"The time it took to clear the stage is {_hour:D2}h {_min:D2}m {Mathf.FloorToInt(_sec):D2}s!";
+        SaveController.Instance.SaveTime(_hour, _min, Mathf.FloorToInt(_sec));
 
         _hour = 0;
         _min = 0;
