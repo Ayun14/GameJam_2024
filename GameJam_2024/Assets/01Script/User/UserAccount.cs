@@ -257,7 +257,7 @@ public class UserAccount : MonoBehaviour
 
         if (DBTask.Exception != null)
         {
-            Debug.LogWarning($"");
+            Debug.LogWarning($"Failed UserName Save: {DBTask.Exception}");
         }
         else
         {
@@ -273,7 +273,7 @@ public class UserAccount : MonoBehaviour
 
         if (DBTask.Exception != null)
         {
-            Debug.LogWarning($"");
+            Debug.LogWarning($"Failed Password Save: {DBTask.Exception}");
         }
         else
         {
@@ -289,7 +289,7 @@ public class UserAccount : MonoBehaviour
 
         if (DBTask.Exception != null)
         {
-            Debug.LogWarning($"");
+            Debug.LogWarning($"Failed UserEmail Save: {DBTask.Exception}");
         }
         else
         {

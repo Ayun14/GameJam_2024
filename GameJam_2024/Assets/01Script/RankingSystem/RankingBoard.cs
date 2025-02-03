@@ -2,7 +2,6 @@ using Firebase.Database;
 using PimDeWitte.UnityMainThreadDispatcher;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class RankingBoard : MonoBehaviour
@@ -10,6 +9,7 @@ public class RankingBoard : MonoBehaviour
     [Header("Ranking Block")]
     [SerializeField] private RankingBlock _rankingBlock;
     [SerializeField] private Transform _rankingBlockSpawnTrm;
+    private bool _isSetRankingBoard = false;
 
     [Header("Current User")]
     [SerializeField] private TextMeshProUGUI _userRankText;
@@ -40,12 +40,13 @@ public class RankingBoard : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("OnEnable RankingBoard");
         SetRankingBoard();
     }
 
     private void SetRankingBoard()
     {
+        _isSetRankingBoard = true;
+
         // 기존 데이터 블록 삭제
         _userDataList.Clear();
         RankingBlock[] blockArr = _rankingBlockSpawnTrm.GetComponentsInChildren<RankingBlock>();
@@ -101,7 +102,6 @@ public class RankingBoard : MonoBehaviour
                                 _userDataList[i - 1].clearTime != _userDataList[i].clearTime)
                                 {
                                     rank = i + 1;
-                                    //++rank;
                                 }
                             }
                             InstantiateRankingBlock(rank, _userDataList[i]);
@@ -114,6 +114,8 @@ public class RankingBoard : MonoBehaviour
                 }
             });
         }
+
+        _isSetRankingBoard = false;
     }
 
     private void SetCurrentUserUI(int rank, UserData userData)
@@ -133,6 +135,7 @@ public class RankingBoard : MonoBehaviour
         }
 
         GameObject go = PoolManager.Instance.Pop("RankingBlock", _rankingBlockSpawnTrm);
+        go.transform.localScale = Vector3.one;
         if (go.TryGetComponent(out RankingBlock block))
         {
             block.SetBlockText(rank.ToString(), userData.userName,
@@ -152,6 +155,8 @@ public class RankingBoard : MonoBehaviour
     // 새로 고침
     public void OnRefreshButtonClick()
     {
+        if (_isSetRankingBoard) return;
+
         SetRankingBoard();
     }
 }
