@@ -49,8 +49,8 @@ public class MeterController : MonoBehaviour
 
     private void Timer()
     {
-        _currentTime += Time.deltaTime;
-        _sec += Time.deltaTime;
+        _currentTime += Time.unscaledDeltaTime;
+        _sec += Time.unscaledDeltaTime;
         if (_sec >= 60f)
         {
             _min += 1;
