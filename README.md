@@ -18,14 +18,14 @@
 
 <br><br>
 
-## 🔗 Link  
-- **[Download](https://buly.kr/4bh76oz)**  
-- **[Youtube](https://youtu.be/IRwG7T8puFM)**  
-
-<br><br>
-
 ## 🎞️ 소개 영상  
 
 [![유튜브 영상 보기](https://img.youtube.com/vi/IRwG7T8puFM/0.jpg)](https://www.youtube.com/watch?v=IRwG7T8puFM)  
+
+<br><br>
+
+## 🔗 Link  
+- **[Download](https://buly.kr/4bh76oz)**  
+- **[Youtube](https://youtu.be/IRwG7T8puFM)**
 
 <br><br>
